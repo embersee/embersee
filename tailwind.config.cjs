@@ -12,8 +12,10 @@ module.exports = {
         babycarrot: "#ff7e3b",
         matcha: "#abeb67",
         whisper: "#5c5b5b",
-        flamingo: "#D66CA5",
+        flamingo: "#f57abc",
         babyblue: "#78B5F5",
+        seafoam: "#43fab7",
+        tokyo: "#7381ff",
       },
       backgroundImage: {
         "hero-pattern":

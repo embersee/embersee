@@ -1,7 +1,7 @@
 <nav>
-  <div class="flex h-12 justify-between items-center px-10">
+  <div class="flex h-16 justify-between items-center px-10">
     <a href="/">2023 // EMBERSEE</a>
-    <p class="hidden md:block">SAINT-PETERSBURG 09:42:18</p>
+    <p class="hidden md:block">SAINT-PETERSBURG <span id="time"></span></p>
     <p class="hidden md:block">STATUS: 0 ONLINE</p>
     <div class="space-x-2 hidden md:block">
       <a href="#index">INDEX</a><span>/</span><a href="#work">WORK</a><span
@@ -13,6 +13,30 @@
 
 <style>
   nav {
-    @apply bg-black/80 sticky top-0 z-50 text-white backdrop-blur backdrop-hue-rotate-90;
+    @apply bg-black/30 sticky top-0 z-50 text-white backdrop-blur backdrop-hue-rotate-90;
   }
 </style>
+
+<script defer>
+function startTime() {
+  const today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  const timeEl = document.getElementById("time");
+  if (!timeEl) return;
+  timeEl.innerHTML = h + ":" + m + ":" + s;
+  setTimeout(startTime, 1000);
+}
+
+function checkTime(i) {
+  if (i < 10) {
+    i = "0" + i;
+  } // add zero in front of numbers < 10
+  return i;
+}
+
+startTime();
+</script>

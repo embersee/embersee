@@ -1,0 +1,109 @@
+---
+import { Image } from "astro:assets";
+import ProjectCard from "../ProjectCard.astro";
+import Spacer from "../Spacer.astro";
+---
+
+<section
+  id="work"
+  class="bg-black lg:max-w-7xl text-white mx-auto outline-container"
+>
+  <div
+    class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
+  >
+    <div class="flex-1 text-seafoam">
+      <div class="outline-container dotted py-10">
+        <p class="bg-black outline-container">
+          I love storytelling and exploring unique design interface. Here are
+          some exciting project and explorations that I have done.
+        </p>
+      </div>
+    </div>
+    <div class="md:w-[40%] text-purple-400">
+      <div class="outline-container stripped flex items-center">
+        <h1 class="bg-black px-4 py-10">About me 👨🏻‍🎨</h1>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
+  >
+    <div class="flex-1 text-seafoam space-y-10">
+      <div class="outline-container dotted pt-6">
+        <div class="bg-black px-2 outline-container">
+          <h2>Email</h2>
+          <h3>embersee@proton.me</h3>
+        </div>
+      </div>
+
+      <div class="outline-container dotted pt-6">
+        <div class="bg-black px-2 outline-container">
+          <h2>Telegram</h2>
+          <h3>
+            <a href="https://embersee.t.me" target="_blank"
+              >https://embersee.t.me</a
+            >
+          </h3>
+        </div>
+      </div>
+
+      <div class="outline-container dotted pt-6">
+        <div class="bg-black px-2 outline-container">
+          <h2>Github</h2>
+          <h3>
+            <a href="https://github.com/embersee" target="_blank"
+              >https://github.com/embersee</a
+            >
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:w-[70%] text-purple-400">
+      <div class="outline-container stripped">
+        <h2 class="bg-black px-4 py-10">
+          Purpose-driven product designer who loves crafting unique, yet
+          engaging solution that tackles fundamental problem
+        </h2>
+        <div class="bg-black m-4 p-2 space-y-4">
+          <h3>
+            Highly interested to work on digital products in early-stage or even
+            newly-founded startup that are oriented towards empowering the lives
+            of many people.
+          </h3>
+          <h3>
+            I can help in designing end-to-end product experience using design
+            thinking framework, no-code experimentation for product validation,
+            and suggesting product strategy based on customer-centered product
+            research.
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <Spacer /> -->
+
+  <style>
+    h1 {
+      @apply font-bold text-5xl text-white;
+    }
+
+    h2 {
+      @apply font-bold text-2xl text-white;
+    }
+
+    h3 {
+      @apply text-xl text-white;
+    }
+
+    p {
+      @apply font-light text-base  text-white;
+    }
+
+    a {
+      @apply text-tokyo hover:underline;
+    }
+  </style>
+</section>

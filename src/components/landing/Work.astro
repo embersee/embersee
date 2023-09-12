@@ -1,27 +1,31 @@
 ---
-import { Image } from "astro:assets";
 import ProjectCard from "../ProjectCard.astro";
+import Spacer from "../Spacer.astro";
 ---
 
 <section
   id="work"
-  class="h-screen bg-black lg:max-w-7xl text-white mx-auto outline-container-pink p-6"
+  class="bg-black lg:max-w-7xl text-white mx-auto outline-container transition-all"
 >
   <div
-    class="md:flex justify-center items-stretch gap-6 space-y-6 md:space-y-0"
+    class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
   >
-    <div class="flex-1 outline-container-blue stripped flex items-center">
-      <h1 class="bg-black px-4 py-10">Featured Work 💻</h1>
+    <div class="flex-1 text-babyblue">
+      <div class="outline-container stripped flex items-center">
+        <h1 class="bg-black px-4 py-10">Featured Work 💻</h1>
+      </div>
     </div>
-    <div class="md:w-[40%] outline-container-green dotted py-10">
-      <p class="bg-black outline-container-green">
-        I love storytelling and exploring unique design interface. Here are some
-        exciting project and explorations that I have done.
-      </p>
+    <div class="md:w-[40%] text-matcha">
+      <div class="outline-container dotted py-10">
+        <p class="bg-black outline-container">
+          I love storytelling and exploring unique design interface. Here are
+          some exciting project and explorations that I have done.
+        </p>
+      </div>
     </div>
   </div>
 
-  <ul class="mt-14 space-y-4 max-w-4xl">
+  <ul class="pt-6 space-y-4 text-yellow-300">
     <ProjectCard
       title="Spectrier"
       desc="E-commerce Telegram WebApp bot with a management system."
@@ -30,7 +34,7 @@ import ProjectCard from "../ProjectCard.astro";
     />
 
     <ProjectCard
-      title="Embersee/embersee"
+      title="Embersee"
       desc="This portfolio website."
       stack={["Astro"]}
     />
@@ -42,13 +46,15 @@ import ProjectCard from "../ProjectCard.astro";
     />
   </ul>
 
+  <Spacer />
+
   <style>
     h1 {
-      @apply font-bold text-5xl;
+      @apply font-bold text-5xl text-white;
     }
 
     p {
-      @apply font-light text-base text-whisper;
+      @apply font-light text-base  text-white;
     }
   </style>
 </section>

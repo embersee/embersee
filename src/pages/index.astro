@@ -2,57 +2,18 @@
 import Banner from "@/components/landing/Banner.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Work from "@/components/landing/Work.astro";
+import About from "@/components/landing/About.astro";
 ---
 
 <BaseLayout>
-  <main><Banner /> <div class="p-6"><Work /></div></main>
+  <main><Banner /> <div class="p-6"><Work /> <About /></div></main>
 </BaseLayout>
 
 <style is:global>
   .dotted {
     --dot-bg: black;
-    --dot-color: #abeb67;
+    --dot-color: currentColor;
     --dot-size: 1px;
-    --dot-space: 5px;
-    background:
-      linear-gradient(
-          90deg,
-          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-          transparent 1%
-        )
-        center / var(--dot-space) var(--dot-space),
-      linear-gradient(
-          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-          transparent 1%
-        )
-        center / var(--dot-space) var(--dot-space),
-      var(--dot-color);
-  }
-
-  .dotted-carrot {
-    --dot-bg: black;
-    --dot-color: #ff7e3b;
-    --dot-size: 1px;
-    --dot-space: 5px;
-    background:
-      linear-gradient(
-          90deg,
-          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-          transparent 1%
-        )
-        center / var(--dot-space) var(--dot-space),
-      linear-gradient(
-          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-          transparent 1%
-        )
-        center / var(--dot-space) var(--dot-space),
-      var(--dot-color);
-  }
-
-  .dotted-carrot:hover {
-    --dot-bg: black;
-    --dot-color: #ff7e3b;
-    --dot-size: 2px;
     --dot-space: 5px;
     transition-duration: 300ms;
     background:
@@ -70,35 +31,44 @@ import Work from "@/components/landing/Work.astro";
       var(--dot-color);
   }
 
+  .dotted:hover {
+    --dot-bg: black;
+    --dot-color: currentColor;
+    --dot-size: 2px;
+    --dot-space: 5px;
+    background:
+      linear-gradient(
+          90deg,
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      linear-gradient(
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      var(--dot-color);
+  }
+
   .stripped {
     --dot-bg: black;
-    --dot-color: #78b5f5;
+    --dot-color: currentColor;
     --dot-size: 1px;
     --dot-space: 5px;
     background: repeating-linear-gradient(
       45deg,
       transparent,
-      transparent 3px,
-      var(--dot-color) 3px,
-      var(--dot-color) 4px
+      transparent 1px,
+      transparent 5px,
+      var(--dot-color) 5px,
+      var(--dot-color) 6px
     );
   }
 
-  .outline-container-pink {
-    @apply outline outline-1 outline-flamingo;
-  }
-
-  .outline-container-blue {
-    @apply outline outline-1 outline-babyblue;
-  }
-
-  .outline-container-green {
-    @apply outline outline-1 outline-matcha;
-  }
-
-  .outline-container-orange {
-    @apply outline outline-1 outline-babycarrot;
-  }
+  /* .outline-container {
+    @apply outline outline-1 outline-[currentColor];
+  } */
 
   html {
     scroll-behavior: smooth;

@@ -11,19 +11,19 @@ interface Props {
 const { href, title, desc, stack, wip } = Astro.props;
 ---
 
-<li class="project-card outline-container-orange shadow-box dotted-carrot">
-  <a class="flex bg-black outline-container-orange p-2" href={href}>
+<li class="group project-card outline-container shadow-box dotted">
+  <a class="flex bg-black outline-container p-2 text-white" href={href}>
     <div class="grow">
       <h3>{title}</h3>
       <p class="text-whisper">{desc}</p>
       <p>{stack?.map((s) => <span>{s} \\ </span>)}</p>
     </div>
-    <div class="flex items-center mr-5 space-x-2">
+    <div class="flex items-center mr-3 space-x-2">
       {wip && <p class="badge">#WIP</p>}
       {
         href ? (
           <>
-            <p>PREVIEW</p>
+            <p class="group-hover:underline">PREVIEW</p>
             <LinkArrow height={24} width={24} />
           </>
         ) : (
@@ -48,9 +48,9 @@ const { href, title, desc, stack, wip } = Astro.props;
   }
 
   .shadow-box:hover {
-    -webkit-box-shadow: -8px 8px 0px 0px #ff7e3b;
-    -moz-box-shadow: -8px 8px 0px 0px #ff7e3b;
-    box-shadow: -8px 8px 0px 0px #ff7e3b;
+    -webkit-box-shadow: -8px 8px 0px 0px currentColor;
+    -moz-box-shadow: -8px 8px 0px 0px currentColor;
+    box-shadow: -8px 8px 0px 0px currentColor;
     transition-duration: 150ms;
   }
 </style>

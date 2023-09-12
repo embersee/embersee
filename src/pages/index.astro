@@ -5,7 +5,102 @@ import Work from "@/components/landing/Work.astro";
 ---
 
 <BaseLayout>
-  <main><Banner /> <div class="m-10"><Work /></div></main>
+  <main><Banner /> <div class="p-6"><Work /></div></main>
 </BaseLayout>
 
-<style></style>
+<style is:global>
+  .dotted {
+    --dot-bg: black;
+    --dot-color: #abeb67;
+    --dot-size: 1px;
+    --dot-space: 5px;
+    background:
+      linear-gradient(
+          90deg,
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      linear-gradient(
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      var(--dot-color);
+  }
+
+  .dotted-carrot {
+    --dot-bg: black;
+    --dot-color: #ff7e3b;
+    --dot-size: 1px;
+    --dot-space: 5px;
+    background:
+      linear-gradient(
+          90deg,
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      linear-gradient(
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      var(--dot-color);
+  }
+
+  .dotted-carrot:hover {
+    --dot-bg: black;
+    --dot-color: #ff7e3b;
+    --dot-size: 2px;
+    --dot-space: 5px;
+    transition-duration: 300ms;
+    background:
+      linear-gradient(
+          90deg,
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      linear-gradient(
+          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+          transparent 1%
+        )
+        center / var(--dot-space) var(--dot-space),
+      var(--dot-color);
+  }
+
+  .stripped {
+    --dot-bg: black;
+    --dot-color: #78b5f5;
+    --dot-size: 1px;
+    --dot-space: 5px;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 3px,
+      var(--dot-color) 3px,
+      var(--dot-color) 4px
+    );
+  }
+
+  .outline-container-pink {
+    @apply outline outline-1 outline-flamingo;
+  }
+
+  .outline-container-blue {
+    @apply outline outline-1 outline-babyblue;
+  }
+
+  .outline-container-green {
+    @apply outline outline-1 outline-matcha;
+  }
+
+  .outline-container-orange {
+    @apply outline outline-1 outline-babycarrot;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

@@ -9,8 +9,11 @@ module.exports = {
         white: "#e7e7d8",
         eagle: "#afac95",
         carrot: "#ff5800",
+        babycarrot: "#ff7e3b",
         matcha: "#abeb67",
-        whisper: "#777777",
+        whisper: "#5c5b5b",
+        flamingo: "#D66CA5",
+        babyblue: "#78B5F5",
       },
       backgroundImage: {
         "hero-pattern":

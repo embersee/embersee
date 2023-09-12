@@ -1,0 +1,56 @@
+---
+import LinkArrow from "./LinkArrow.astro";
+interface Props {
+  title: string;
+  desc: string;
+  href?: string;
+  stack?: string[];
+  wip?: boolean;
+}
+
+const { href, title, desc, stack, wip } = Astro.props;
+---
+
+<li class="project-card outline-container-orange shadow-box dotted-carrot">
+  <a class="flex bg-black outline-container-orange p-2" href={href}>
+    <div class="grow">
+      <h3>{title}</h3>
+      <p class="text-whisper">{desc}</p>
+      <p>{stack?.map((s) => <span>{s} \\ </span>)}</p>
+    </div>
+    <div class="flex items-center mr-5 space-x-2">
+      {wip && <p class="badge">#WIP</p>}
+      {
+        href ? (
+          <>
+            <p>PREVIEW</p>
+            <LinkArrow height={24} width={24} />
+          </>
+        ) : (
+          <p class="badge">#SOON</p>
+        )
+      }
+    </div>
+  </a>
+</li>
+
+<style>
+  .project-card {
+    @apply w-full p-4 hover:-translate-y-2 hover:translate-x-2 transition-all;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+
+  .badge {
+    @apply outline outline-1 px-1;
+  }
+
+  .shadow-box:hover {
+    -webkit-box-shadow: -8px 8px 0px 0px #ff7e3b;
+    -moz-box-shadow: -8px 8px 0px 0px #ff7e3b;
+    box-shadow: -8px 8px 0px 0px #ff7e3b;
+    transition-duration: 150ms;
+  }
+</style>

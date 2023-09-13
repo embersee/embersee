@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Spacer from "../Spacer.astro";
+import Button from "../Button.astro";
 ---
 
 <section
@@ -48,7 +49,9 @@ import Spacer from "../Spacer.astro";
         <div class="outline-container dotted pl-6 text-purple-500">
           <div class="bg-black px-2 outline-container">
             <h2>Email</h2>
-            <h3><a href="mailto:embersee@proton.me">embersee@proton.me</a></h3>
+            <h3>
+              <a href="mailto:embersee@proton.me">mailto:embersee@proton.me</a>
+            </h3>
           </div>
         </div>
 
@@ -99,6 +102,7 @@ import Spacer from "../Spacer.astro";
             thing. We need to figure out first whether the problem is a real one
             that needs solving.
           </h3>
+          <Button href="/about" content="see more" style="stripped" />
         </div>
       </div>
     </div>

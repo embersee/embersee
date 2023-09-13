@@ -1,0 +1,27 @@
+---
+import LinkArrow from "./LinkArrow.astro";
+interface Props {
+  href: string;
+  content: string;
+  style: "dotted" | "stripped" | "hashed" | "crossed";
+}
+const { href, content, style } = Astro.props;
+---
+
+<div id="button" class={`outline-container shadow-box ` + style}>
+  <a>
+    <div class="p-4 bg-black flex gap-1 text-white">
+      <p>{content}</p><LinkArrow height={24} width={24} />
+    </div>
+  </a>
+</div>
+
+<style>
+  #button {
+    @apply w-min p-4 hover:underline hover:-translate-y-2 hover:translate-x-2 transition-all whitespace-nowrap select-none cursor-pointer;
+  }
+
+  #button:active {
+    @apply hover:-translate-y-1 hover:translate-x-1;
+  }
+</style>

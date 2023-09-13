@@ -36,7 +36,11 @@ const { href, title, desc, stack, wip } = Astro.props;
 
 <style>
   .project-card {
-    @apply w-full p-4 hover:-translate-y-2 hover:translate-x-2 transition-all;
+    @apply w-full p-4 hover:-translate-y-2 hover:translate-x-2 transition-all select-none cursor-pointer;
+  }
+
+  .project-card:active {
+    @apply hover:-translate-y-1 hover:translate-x-1;
   }
 
   h3 {
@@ -45,12 +49,5 @@ const { href, title, desc, stack, wip } = Astro.props;
 
   .badge {
     @apply outline outline-1 px-1;
-  }
-
-  .shadow-box:hover {
-    -webkit-box-shadow: -8px 8px 0px 0px currentColor;
-    -moz-box-shadow: -8px 8px 0px 0px currentColor;
-    box-shadow: -8px 8px 0px 0px currentColor;
-    transition-duration: 150ms;
   }
 </style>

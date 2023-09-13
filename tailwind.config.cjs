@@ -24,7 +24,12 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ["Inter", ...defaultTheme.fontFamily.sans],
+      sans: [
+        "Martian Mono",
+        "Source Code Pro",
+        "Inter",
+        ...defaultTheme.fontFamily.sans,
+      ],
     },
   },
   plugins: [],

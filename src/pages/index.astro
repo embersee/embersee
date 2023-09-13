@@ -19,7 +19,6 @@ import Spacer from "@/components/Spacer.astro";
     --dot-color: currentColor;
     --dot-size: 3px;
     --dot-space: 6px;
-    transition-duration: 300ms;
     background:
       linear-gradient(
           90deg,
@@ -96,8 +95,25 @@ import Spacer from "@/components/Spacer.astro";
       );
   }
 
+  .shadow-box:hover {
+    -webkit-box-shadow: -8px 8px 0px 0px currentColor;
+    -moz-box-shadow: -8px 8px 0px 0px currentColor;
+    box-shadow: -8px 8px 0px 0px currentColor;
+    transition-duration: 150ms;
+  }
+
+  .shadow-box:active {
+    -webkit-box-shadow: -4px 4px 0px 0px currentColor;
+    -moz-box-shadow: -4px 4px 0px 0px currentColor;
+    box-shadow: -4px 4px 0px 0px currentColor;
+  }
+
   .outline-container:hover {
-    @apply outline outline-offset-8 outline-2 outline-[currentColor] transition-all duration-300;
+    @apply outline outline-offset-8 outline-2 outline-[currentColor] transition-all duration-150;
+  }
+
+  .outline-container:active {
+    @apply outline-offset-4;
   }
 
   /* .spacer {

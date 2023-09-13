@@ -3,17 +3,21 @@ import Banner from "@/components/landing/Banner.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Work from "@/components/landing/Work.astro";
 import About from "@/components/landing/About.astro";
+import Spacer from "@/components/Spacer.astro";
 ---
 
 <BaseLayout>
-  <main><Banner /> <div class="p-6"><Work /> <About /></div></main>
+  <main>
+    <Banner />
+    <div class="p-6"><Spacer /><Work /><Spacer /> <About /><Spacer /></div>
+  </main>
 </BaseLayout>
 
 <style is:global>
   .dotted {
     --dot-bg: black;
     --dot-color: currentColor;
-    --dot-size: 1px;
+    --dot-size: 2px;
     --dot-space: 5px;
     transition-duration: 300ms;
     background:
@@ -66,8 +70,12 @@ import About from "@/components/landing/About.astro";
     );
   }
 
-  /* .outline-container {
-    @apply outline outline-1 outline-[currentColor];
+  /* .outline-container:hover {
+    @apply outline outline-2 outline-[currentColor] transition-all duration-300;
+  } */
+
+  /* .spacer {
+    @apply outline outline-2 outline-[currentColor] transition-all duration-300;
   } */
 
   html {

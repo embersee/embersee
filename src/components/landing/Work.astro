@@ -5,7 +5,7 @@ import Spacer from "../Spacer.astro";
 
 <section
   id="work"
-  class="bg-black lg:max-w-7xl text-white mx-auto outline-container transition-all"
+  class="bg-black lg:max-w-7xl text-white mx-auto outline-container transition-all scroll-mt-16"
 >
   <div
     class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
@@ -25,32 +25,48 @@ import Spacer from "../Spacer.astro";
     </div>
   </div>
 
-  <ul class="pt-6 space-y-4 text-yellow-300">
-    <ProjectCard
-      title="Spectrier"
-      desc="E-commerce Telegram WebApp bot with a management system."
-      href="https://github.com/embersee/spectrier"
-      stack={["Next", "Typescript", "Tailwind", "tRPC", "Prisma"]}
-    />
-
-    <ProjectCard
-      title="Embersee"
-      desc="This portfolio website."
-      stack={["Astro"]}
-    />
-
-    <ProjectCard
-      title="Spectrier"
-      desc="E-commerce Telegram WebApp bot with a management system."
-      wip
-    />
-  </ul>
-
   <Spacer />
+
+  <div class="md:flex gap-6">
+    <ul class="flex-1 space-y-4 text-yellow-300">
+      <ProjectCard
+        title="Spectrier"
+        desc="E-commerce Telegram WebApp bot with a management system."
+        href="https://github.com/embersee/spectrier"
+        stack={["Next", "Typescript", "Tailwind", "tRPC", "Prisma"]}
+      />
+
+      <ProjectCard
+        title="Embersee"
+        desc="This portfolio website."
+        stack={["Astro"]}
+      />
+
+      <ProjectCard
+        title="Spectrier"
+        desc="E-commerce Telegram WebApp bot with a management system."
+        wip
+      />
+    </ul>
+    <div class="md:w-[40%] stripped">
+      <div class="bg-black h-full m-4 p-4">
+        <h2>My Tech Stack / Education / Employment</h2>
+        <ul>
+          <li>Next</li>
+          <li>Next</li>
+          <li>Next</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <style>
     h1 {
       @apply font-bold text-5xl text-white;
+    }
+
+    h2 {
+      @apply font-bold text-2xl text-white;
     }
 
     p {

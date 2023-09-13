@@ -1,12 +1,11 @@
 ---
 import { Image } from "astro:assets";
-import ProjectCard from "../ProjectCard.astro";
 import Spacer from "../Spacer.astro";
 ---
 
 <section
-  id="work"
-  class="bg-black lg:max-w-7xl text-white mx-auto outline-container"
+  id="about"
+  class="bg-black lg:max-w-7xl text-white mx-auto outline-container scroll-mt-16"
 >
   <div
     class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
@@ -26,36 +25,55 @@ import Spacer from "../Spacer.astro";
     </div>
   </div>
 
+  <Spacer />
+
   <div
     class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
   >
-    <div class="flex-1 space-y-10">
-      <div class="outline-container dotted pl-6 text-green-500">
-        <div class="bg-black px-2 outline-container">
-          <h2>Email</h2>
-          <h3><a href="mailto:embersee@proton.me">embersee@proton.me</a></h3>
+    <div class="flex-1">
+      <div id="profile">
+        <Image
+          height={300}
+          width={300}
+          src="https://avatars.githubusercontent.com/u/78863729?v=4"
+          alt="pfp"
+          class="rounded-full h-full w-full dotted p-2 text-green-400"
+        />
+        <div class="my-4">
+          <h2>My name is Philipp S.</h2>
+          <h2>My name is Philipp S.</h2>
+          <h2>My name is Philipp S.</h2>
+          <h2>My name is Philipp S.</h2>
         </div>
       </div>
-
-      <div class="outline-container dotted pl-6 text-blue-500">
-        <div class="bg-black px-2 outline-container">
-          <h2>Telegram</h2>
-          <h3>
-            <a href="https://embersee.t.me" target="_blank"
-              >https://embersee.t.me</a
-            >
-          </h3>
+      <div id="links" class="space-y-6">
+        <div class="outline-container dotted pl-6 text-purple-500">
+          <div class="bg-black px-2 outline-container">
+            <h2>Email</h2>
+            <h3><a href="mailto:embersee@proton.me">embersee@proton.me</a></h3>
+          </div>
         </div>
-      </div>
 
-      <div class="outline-container dotted pl-6 text-orange-500">
-        <div class="bg-black px-2 outline-container">
-          <h2>Github</h2>
-          <h3>
-            <a href="https://github.com/embersee" target="_blank"
-              >https://github.com/embersee</a
-            >
-          </h3>
+        <div class="outline-container dotted pl-6 text-blue-500">
+          <div class="bg-black px-2 outline-container">
+            <h2>Telegram</h2>
+            <h3>
+              <a href="https://embersee.t.me" target="_blank"
+                >https://embersee.t.me</a
+              >
+            </h3>
+          </div>
+        </div>
+
+        <div class="outline-container dotted pl-6 text-orange-500">
+          <div class="bg-black px-2 outline-container">
+            <h2>Github</h2>
+            <h3>
+              <a href="https://github.com/embersee" target="_blank"
+                >https://github.com/embersee</a
+              >
+            </h3>
+          </div>
         </div>
       </div>
     </div>

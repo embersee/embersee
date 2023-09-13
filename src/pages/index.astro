@@ -17,29 +17,9 @@ import Spacer from "@/components/Spacer.astro";
   .dotted {
     --dot-bg: black;
     --dot-color: currentColor;
-    --dot-size: 2px;
-    --dot-space: 5px;
+    --dot-size: 3px;
+    --dot-space: 6px;
     transition-duration: 300ms;
-    background:
-      linear-gradient(
-          90deg,
-          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-          transparent 1%
-        )
-        center / var(--dot-space) var(--dot-space),
-      linear-gradient(
-          var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-          transparent 1%
-        )
-        center / var(--dot-space) var(--dot-space),
-      var(--dot-color);
-  }
-
-  .dotted:hover {
-    --dot-bg: black;
-    --dot-color: currentColor;
-    --dot-size: 2px;
-    --dot-space: 5px;
     background:
       linear-gradient(
           90deg,
@@ -63,11 +43,57 @@ import Spacer from "@/components/Spacer.astro";
     background: repeating-linear-gradient(
       45deg,
       transparent,
-      transparent 1px,
+      transparent 3px,
       transparent 5px,
       var(--dot-color) 5px,
-      var(--dot-color) 6px
+      var(--dot-color) 7px
     );
+  }
+
+  .hashed {
+    --dot-bg: black;
+    --dot-color: currentColor;
+    --dot-size: 1px;
+    --dot-space: 5px;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 3px,
+        transparent 5px,
+        var(--dot-color) 5px,
+        var(--dot-color) 7px
+      ),
+      repeating-linear-gradient(
+        135deg,
+        transparent,
+        transparent 3px,
+        transparent 5px,
+        var(--dot-color) 5px,
+        var(--dot-color) 7px
+      );
+  }
+
+  .crossed {
+    --dot-bg: black;
+    --dot-color: currentColor;
+    --dot-size: 1px;
+    --dot-space: 5px;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 1px,
+        transparent 5px,
+        var(--dot-color) 5px,
+        var(--dot-color) 6px
+      ),
+      repeating-linear-gradient(
+        180deg,
+        transparent,
+        transparent 1px,
+        transparent 5px,
+        var(--dot-color) 5px,
+        var(--dot-color) 6px
+      );
   }
 
   /* .outline-container:hover {

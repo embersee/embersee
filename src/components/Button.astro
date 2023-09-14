@@ -18,7 +18,11 @@ const { href, content, blank } = Astro.props;
 
 <style>
   #button {
-    @apply bg-night w-min hover:underline hover:-translate-y-2 hover:translate-x-2 transition-all whitespace-nowrap select-none cursor-pointer hover:outline outline-2 border-current;
+    @apply bg-night w-min transition-all whitespace-nowrap select-none cursor-pointer outline-2 border-current;
+  }
+
+  #button:hover {
+    @apply hover:underline hover:-translate-y-2 hover:translate-x-2 hover:outline;
   }
 
   #button:active {

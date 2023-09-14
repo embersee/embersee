@@ -4,32 +4,26 @@ import Spacer from "../Spacer.astro";
 import Button from "../Button.astro";
 ---
 
-<section
-  id="about"
-  class="bg-black lg:max-w-7xl text-white mx-auto scroll-mt-16"
->
+<section id="about" class="text-white mx-auto scroll-mt-16">
   <div
-    class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
+    class="md:flex my-10 justify-center items-center gap-6 space-y-6 md:space-y-0"
   >
-    <div class="flex-1 text-seafoam">
-      <div class="outline-container dotted py-8">
-        <p class="bg-black p-2">
-          I love storytelling and exploring unique design interface. Here are
-          some exciting project and explorations that I have done.
-        </p>
-      </div>
+    <div class="flex-1 text-seafoam outline-container crossed p-2 py-8 group">
+      <p class="text-justify">
+        I love storytelling and exploring unique design <strong
+          class="group-hover:text-seafoam">interface</strong
+        >. Here are some exciting <strong class="group-hover:text-seafoam"
+          >project</strong
+        > and explorations that I have done.
+      </p>
     </div>
-    <div class="md:w-[40%] text-purple-400">
-      <div class="outline-container hashed flex items-center">
-        <h1 class="bg-black px-4 py-10">About me</h1>
-      </div>
+    <div class="md:w-[40%] text-tokyo outline-container stripped">
+      <h1>About Me.</h1>
     </div>
   </div>
 
-  <Spacer />
-
   <div
-    class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
+    class="md:flex justify-center items-stretch gap-6 space-y-6 md:space-y-0"
   >
     <div class="flex-1 mx-10">
       <div id="profile" class="outline-container text-green-400">
@@ -43,92 +37,81 @@ import Button from "../Button.astro";
         <div class="my-4">
           <h2>My name is Philipp S.</h2>
           <h4 class="text-whisper">AKA embersee</h4>
+          <h4 class="text-whisper">
+            some text about me or my current status from discord live presense
+          </h4>
         </div>
-      </div>
-      <div id="links" class="space-y-6">
-        <div class="outline-container dotted pl-6 text-purple-500">
-          <div class="bg-black px-2 outline-container">
-            <h2>Email</h2>
-            <h3>
-              <a href="mailto:embersee@proton.me">mailto:embersee@proton.me</a>
-            </h3>
+        <div id="links" class="flex justify-between">
+          <div class="text-purple-500">
+            <Button href="mailto:embersee@proton.me" content="Email" blank />
           </div>
-        </div>
 
-        <div class="outline-container dotted pl-6 text-blue-500">
-          <div class="bg-black px-2 outline-container">
-            <h2>Telegram</h2>
-            <h3>
-              <a href="https://embersee.t.me" target="_blank"
-                >https://embersee.t.me</a
-              >
-            </h3>
+          <div class="text-blue-500">
+            <Button
+              href="https://telegram.me/embersee"
+              content="Telegram"
+              blank
+            />
           </div>
-        </div>
 
-        <div class="outline-container dotted pl-6 text-orange-500">
-          <div class="bg-black px-2 outline-container">
-            <h2>Github</h2>
-            <h3>
-              <a href="https://github.com/embersee" target="_blank"
-                >https://github.com/embersee</a
-              >
-            </h3>
+          <div class="text-orange-500">
+            <Button href="https://github.com/embersee" content="Github" blank />
           </div>
         </div>
       </div>
     </div>
 
-    <div class="md:w-[60%] text-babycarrot">
-      <div class="outline-container stripped">
-        <h2 class="bg-black mr-4 py-10">
+    <div
+      class="md:w-[60%] flex flex-col items-end outline-container text-brick"
+    >
+      <div class="space-y-4 flex-grow">
+        <h2>
           Purpose-driven product designer who loves crafting unique, yet
           engaging solution that tackles fundamental problem
         </h2>
-        <div class="bg-black mt-4 ml-4 p-4 space-y-4">
-          <h3>
-            Highly interested to work on digital products in early-stage or even
-            newly-founded startup that are oriented towards empowering the lives
-            of many people.
-          </h3>
-          <h3>
-            I can help in designing end-to-end product experience using design
-            thinking framework, no-code experimentation for product validation,
-            and suggesting product strategy based on customer-centered product
-            research.
-          </h3>
-          <h3>
-            One of the biggest risks of building a product is to build the wrong
-            thing. We need to figure out first whether the problem is a real one
-            that needs solving.
-          </h3>
-          <Button href="/about" content="see more" style="stripped" />
-        </div>
+
+        <h3>
+          Highly interested to work on digital products in early-stage or even
+          newly-founded startup that are oriented towards empowering the lives
+          of many people.
+        </h3>
+        <h3>
+          I can help in designing end-to-end product experience using design
+          thinking framework, no-code experimentation for product validation,
+          and suggesting product strategy based on customer-centered product
+          research.
+        </h3>
+        <h3>
+          One of the biggest risks of building a product is to build the wrong
+          thing. We need to figure out first whether the problem is a real one
+          that needs solving.
+        </h3>
+      </div>
+      <div class="self-end">
+        <Button href="/about" content="see more" />
       </div>
     </div>
   </div>
-
-  <!-- <Spacer /> -->
-
-  <style>
-    h1 {
-      @apply font-bold text-5xl text-white;
-    }
-
-    h2 {
-      @apply font-bold text-2xl text-white;
-    }
-
-    h3 {
-      @apply text-xl text-white;
-    }
-
-    p {
-      @apply font-light text-base text-white;
-    }
-
-    a {
-      @apply text-tokyo hover:underline;
-    }
-  </style>
 </section>
+
+<style>
+  h1 {
+    @apply font-bold text-5xl text-white;
+  }
+
+  h2 {
+    @apply font-bold text-2xl text-white;
+  }
+
+  h3 {
+    @apply text-base text-white;
+  }
+
+  p {
+    @apply font-light text-base text-white;
+  }
+
+  a {
+    @apply text-tokyo hover:underline;
+  }
+</style>

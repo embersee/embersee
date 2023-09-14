@@ -11,43 +11,47 @@ interface Props {
 const { href, title, desc, stack, wip } = Astro.props;
 ---
 
-<li class="group project-card outline-container shadow-box dotted">
-  <a class="flex bg-black p-4 text-white" href={href}>
+<li class="group project-card shadow-box p-2">
+  <a class="flex text-white" href={href}>
     <div class="grow">
-      <h3>{title}</h3>
-      <p class="text-whisper">{desc}</p>
-      <p>{stack?.map((s) => <span>{s} \\ </span>)}</p>
-    </div>
-    <div class="flex items-center mr-3 space-x-2">
-      {wip && <p class="badge">#WIP</p>}
-      {
-        href ? (
-          <>
-            <p class="group-hover:underline">PREVIEW</p>
-            <LinkArrow height={24} width={24} />
-          </>
-        ) : (
-          <p class="badge">#SOON</p>
-        )
-      }
+      <div class="flex">
+        <h3>{title}</h3>
+        <div class="flex justify-end gap-2 w-full">
+          {wip && <p>#WIP</p>}
+          {!href && <p>#SOON</p>}
+          {
+            href && (
+              <>
+                <p class="group-hover:underline decoration-yellow-300">
+                  PREVIEW
+                </p>
+                <LinkArrow height={24} width={24} />
+              </>
+            )
+          }
+        </div>
+      </div>
+
+      <p class="text-whisper p-2">{desc}</p>
+      <!-- <p>{stack?.map((s) => <span>{s} \\ </span>)}</p> -->
     </div>
   </a>
 </li>
 
 <style>
   .project-card {
-    @apply w-full p-4 hover:-translate-y-2 hover:translate-x-2 transition-all select-none cursor-pointer;
+    @apply w-full hover:-translate-y-2 hover:translate-x-2 transition-all select-none cursor-pointer bg-night;
+  }
+
+  .project-card:hover {
+    @apply outline outline-2;
   }
 
   .project-card:active {
-    @apply hover:-translate-y-1 hover:translate-x-1;
+    @apply -translate-y-1 translate-x-1;
   }
 
   h3 {
     @apply text-2xl font-semibold;
-  }
-
-  .badge {
-    @apply outline outline-1 px-1;
   }
 </style>

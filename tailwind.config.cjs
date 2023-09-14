@@ -5,17 +5,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // black: "#121212",
-        white: "#e7e7d8",
+        night: "#090909",
+        // white: "#e7e7d8",
         eagle: "#afac95",
         carrot: "#ff5800",
         babycarrot: "#ff7e3b",
-        matcha: "#abeb67",
+        matcha: "#b9ff70",
         whisper: "#5c5b5b",
         flamingo: "#f57abc",
         babyblue: "#78B5F5",
         seafoam: "#43fab7",
         tokyo: "#7381ff",
+        brick: "#FF4D4D",
       },
       backgroundImage: {
         "hero-pattern":

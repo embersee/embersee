@@ -4,32 +4,27 @@ import ProjectCard from "../ProjectCard.astro";
 import Spacer from "../Spacer.astro";
 ---
 
-<section
-  id="work"
-  class="bg-black lg:max-w-7xl text-white mx-auto transition-all scroll-mt-16"
->
+<section id="work" class="mx-auto transition-all scroll-mt-16">
   <div
-    class="md:flex my-10 justify-center items-stretch gap-6 space-y-6 md:space-y-0"
+    class="md:flex my-10 justify-center items-center gap-6 space-y-6 md:space-y-0"
   >
-    <div class="flex-1 text-babyblue">
-      <div class="outline-container hashed flex items-center">
-        <h1 class="bg-black px-4 py-10">Featured Work</h1>
-      </div>
+    <div class="flex-1 text-babyblue outline-container hashed">
+      <h1>Selected Works.</h1>
     </div>
-    <div class="md:w-[40%] text-matcha">
-      <div class="outline-container dotted py-8">
-        <p class="bg-black p-2">
-          I love storytelling and exploring unique design interface. Here are
-          some exciting project and explorations that I have done.
-        </p>
-      </div>
+    <div class="group md:w-[40%] text-matcha outline-container dotted p-2 py-8">
+      <p class="text-justify">
+        I love <strong class="group-hover:text-matcha">storytelling</strong>
+         and exploring unique design interface. Here are some exciting project
+        and <strong class="group-hover:text-matcha">explorations</strong> that I
+        have done.
+      </p>
     </div>
   </div>
 
   <Spacer />
 
-  <div class="md:flex gap-6">
-    <ul class="flex-1 space-y-4 text-yellow-300">
+  <div class="md:flex gap-6 space-y-10 md:space-y-0">
+    <ul class="flex-1 flex flex-col items-end space-y-6 text-yellow-300">
       <ProjectCard
         title="Spectrier"
         desc="E-commerce Telegram WebApp bot with a management system."
@@ -54,18 +49,38 @@ import Spacer from "../Spacer.astro";
         wip
       />
 
-      <Button href="/work" content="see more" style="dotted" />
+      <Button href="/work" content="see more" />
     </ul>
-    <div class="md:w-[40%] outline-container stripped text-flamingo">
-      <div class="bg-black h-full m-4 p-4">
-        <h2>My Tech Stack / Education / Employment</h2>
-        <ul>
-          <li>Next</li>
-          <li>Next</li>
-          <li>Next</li>
-        </ul>
-        <Button href="/experience" content="see more" style="stripped" />
-      </div>
+    <div
+      class="md:w-[40%] flex flex-col items-end space-y-4
+    outline-container text-babycarrot group"
+    >
+      <ul class="space-y-6 font-light text-white flex-grow">
+        <h2>Education / Employment</h2>
+        <li>
+          &diams; Currently: Looking for freelance work / job opportunities!
+        </li>
+        <li>
+          &diams; 09/2023 - Present: Studying at SPbETU "LETI" in <strong
+            class="group-hover:text-babycarrot">Computer Security</strong
+          >.
+        </li>
+        <li>
+          &diams; 04/2023 – 09/2023: Working at "St. Petersburg Information
+          Analytical Center" <strong class="group-hover:text-babycarrot"
+            >solo-leading development</strong
+          > for an internal management system for the HR dept.
+        </li>
+        <li>
+          &diams; 09/2019 – 07/2023: Graduated from "Petrovsky College" studying
+
+
+          <strong class="group-hover:text-babycarrot"
+            >Information systems and databases</strong
+          >.
+        </li>
+      </ul>
+      <Button href="/experience" content="download cv" />
     </div>
   </div>
 

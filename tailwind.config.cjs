@@ -18,11 +18,6 @@ module.exports = {
         tokyo: "#7381ff",
         brick: "#FF4D4D",
       },
-      backgroundImage: {
-        "hero-pattern":
-          "url('https://media.giphy.com/media/3ohhwGGrCD9wCQ5cwU/giphy.gif')",
-        // 'footer-texture': "url('/img/footer-texture.png')",
-      },
     },
     fontFamily: {
       sans: [

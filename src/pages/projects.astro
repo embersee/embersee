@@ -1,0 +1,34 @@
+---
+import Back from "@/components/Back.astro";
+import Heading from "@/components/Heading.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import Spacer from "@/components/Spacer.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+const allProjects = await Astro.glob("../pages/project/*.md");
+---
+
+<BaseLayout>
+  <Spacer />
+  <Back href="/" />
+  <Heading
+    title="Selected Works."
+    subtitle="Here are some exciting project and explorations that I have done."
+    primary=" text-red-500"
+    secondary=" text-green-500"
+    index={1}
+  />
+  <Spacer />
+  <ul class="flex-1 flex flex-col items-end space-y-6 text-yellow-300">
+    {
+      allProjects.map((project) => (
+        <ProjectCard
+          href={project.url}
+          title={project.frontmatter.title}
+          desc={project.frontmatter.description}
+          index={project.frontmatter.id}
+        />
+      ))
+    }
+  </ul>
+  <Spacer />
+</BaseLayout>

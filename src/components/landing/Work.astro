@@ -1,53 +1,36 @@
 ---
 import Button from "../Button.astro";
+import Heading from "../Heading.astro";
 import ProjectCard from "../ProjectCard.astro";
 import Spacer from "../Spacer.astro";
+const allProjects = await Astro.glob("../../pages/project/*.md");
 ---
 
 <section id="work" class="mx-auto transition-all scroll-mt-20">
-  <div class="md:flex justify-center items-center gap-6 space-y-6 md:space-y-0">
-    <div class="flex-1 text-babyblue outline-container hashed">
-      <h1>Selected Works.</h1>
-    </div>
-    <div class="group md:w-[40%] text-matcha outline-container dotted py-8">
-      <p class="text-justify">
-        I love <strong class="group-hover:text-matcha">storytelling</strong>
-         and exploring unique design interface. Here are some exciting project
-        and <strong class="group-hover:text-matcha">explorations</strong> that I
-        have done.
-      </p>
-    </div>
-  </div>
+  <Heading
+    title="Selected Works."
+    subtitle="I love storytelling and exploring unique design interface."
+    primary=" text-babyblue"
+    secondary=" text-matcha"
+    index={1}
+  />
 
   <Spacer />
 
   <div class="md:flex gap-6 space-y-10 md:space-y-0">
     <ul class="flex-1 flex flex-col items-end space-y-6 text-yellow-300">
-      <ProjectCard
-        title="Spectrier"
-        desc="E-commerce Telegram WebApp bot with a management system."
-        href="https://github.com/embersee/spectrier"
-        stack={["Next", "Typescript", "Tailwind", "tRPC", "Prisma"]}
-      />
+      {
+        allProjects.map((project) => (
+          <ProjectCard
+            href={project.url}
+            title={project.frontmatter.title}
+            desc={project.frontmatter.description}
+            index={project.frontmatter.id}
+          />
+        ))
+      }
 
-      <ProjectCard
-        title="Embersee"
-        desc="This portfolio website."
-        stack={["Astro"]}
-      />
-
-      <ProjectCard
-        title="Spectrier"
-        desc="E-commerce Telegram WebApp bot with a management system."
-        wip
-      />
-      <ProjectCard
-        title="Delphox"
-        desc="E-commerce service for distributing serverless Telegram WebApp bots with a management system."
-        wip
-      />
-
-      <Button href="/work" content="see more" />
+      <Button href="/projects" content="see more projects" />
     </ul>
     <div
       class="md:w-[40%] flex flex-col items-end space-y-4
@@ -81,18 +64,4 @@ import Spacer from "../Spacer.astro";
       <Button href="/experience" content="download cv" />
     </div>
   </div>
-
-  <style>
-    h1 {
-      @apply font-bold text-5xl text-white;
-    }
-
-    h2 {
-      @apply font-bold text-2xl text-white;
-    }
-
-    p {
-      @apply font-light text-base  text-white;
-    }
-  </style>
 </section>

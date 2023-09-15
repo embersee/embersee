@@ -6,16 +6,23 @@ interface Props {
   href?: string;
   stack?: string[];
   wip?: boolean;
+  index: number;
 }
 
-const { href, title, desc, stack, wip } = Astro.props;
+const { href, title, desc, wip, index } = Astro.props;
 ---
 
-<li class="group project-card shadow-box p-2">
-  <a class="flex text-white" href={href}>
+<li
+  class="group project-card shadow-box p-2"
+  transition:name=`project-${index}`
+>
+  <a class="text-white" href={href}>
     <div class="grow">
       <div class="flex">
-        <h3>{title}</h3>
+        <h2 transition:name=`blog-title-${index}`>
+          {title}
+          <!-- {`blog-title-${index}`} ### DEBBUGING VIEW TRANSITIONS -->
+        </h2>
         <div class="flex justify-end gap-2 w-full">
           {wip && <p>#WIP</p>}
           {!href && <p>#SOON</p>}
@@ -32,8 +39,9 @@ const { href, title, desc, stack, wip } = Astro.props;
         </div>
       </div>
 
-      <p class="text-whisper p-2">{desc}</p>
-      <!-- <p>{stack?.map((s) => <span>{s} \\ </span>)}</p> -->
+      <p class="text-whisper p-2" transition:name=`blog-desc-${index}`>
+        {desc}
+      </p>
     </div>
   </a>
 </li>
@@ -51,7 +59,7 @@ const { href, title, desc, stack, wip } = Astro.props;
     @apply -translate-y-1 translate-x-1;
   }
 
-  h3 {
-    @apply text-2xl font-semibold;
+  .h2 {
+    @apply whitespace-nowrap;
   }
 </style>

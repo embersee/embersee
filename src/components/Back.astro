@@ -1,17 +1,13 @@
 ---
 import LinkArrow from "@/components/LinkArrow.astro";
-interface Props {
-  href: string;
-  content: string;
-  blank?: boolean;
-}
-const { href, content, blank } = Astro.props;
 ---
 
 <div class="button shadow-box">
-  <a href={href} target={blank ? "_blank" : "_self"}>
+  <a href="/">
     <div class="p-2 flex gap-1 text-white">
-      <p>{content}</p><LinkArrow height={24} width={24} />
+      <div class="rotate-[225deg]"><LinkArrow height={24} width={24} /></div><p>
+        back
+      </p>
     </div>
   </a>
 </div>

@@ -1,0 +1,29 @@
+---
+import Back from "@/components/Back.astro";
+import BlogHeading from "@/components/BlogHeading.astro";
+import Button from "@/components/Button.astro";
+// import Heading from "@/components/Heading.astro";
+import Spacer from "@/components/Spacer.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title}>
+  <Spacer />
+  <Back href="/" />
+  <BlogHeading
+    title={frontmatter.title}
+    subtitle={frontmatter.description}
+    primary=" text-red-500"
+    secondary=" text-green-500"
+    index={frontmatter.id}
+  />
+  <Spacer />
+  <div class="flex items-center gap-4 mb-10">
+    <p>{frontmatter.pubDate.slice(0, 10)}</p>
+    <Button href={frontmatter.url} content="Github url" />
+  </div>
+
+  <slot />
+  <Spacer />
+</BaseLayout>

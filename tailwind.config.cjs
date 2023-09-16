@@ -17,6 +17,7 @@ module.exports = {
         seafoam: "#43fab7",
         tokyo: "#7381ff",
         brick: "#FF4D4D",
+        frost: "#9dffff",
       },
     },
     fontFamily: {

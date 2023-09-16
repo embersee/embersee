@@ -1,7 +1,5 @@
 ---
-import "@fontsource/martian-mono";
 import "@/styles/global.css";
-import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -10,7 +8,6 @@ const { title } = Astro.props;
 ---
 
 <title>{title || "Embersee"}</title>
-<ViewTransitions fallback="swap" />
 
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -19,6 +16,13 @@ const { title } = Astro.props;
 <meta name="author" content="embersee" />
 <!-- <meta name="your keywords" content="Add your keywords here" /> -->
 <meta name="generator" content={Astro.generator} />
+<link
+  rel="preload"
+  href="/fonts/open-sans.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
 
 <!-- Favicon guidelines generated with https://favicon.io/ -->
 <link

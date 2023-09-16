@@ -21,7 +21,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ["Martian Mono", "Inter", ...defaultTheme.fontFamily.sans],
+      sans: ["Martian Mono", ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [],

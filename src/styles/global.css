@@ -10,6 +10,10 @@ html {
   scroll-behavior: smooth;
 }
 
+main {
+  @apply selection:bg-babycarrot;
+}
+
 @layer base {
   /* martian-mono-regular - latin */
   @font-face {
@@ -40,14 +44,14 @@ html h3 {
 }
 
 html p {
-  @apply font-light text-white;
+  @apply font-light text-white ;
 }
 
-.dotted:active {
+.dotted{
   --dot-bg: black;
   --dot-color: color-mix(in srgb, currentColor 50%, transparent);
-  --dot-size: 3px;
-  --dot-space: 6px;
+  --dot-size: 1px;
+  --dot-space: 10px;
   background:
     linear-gradient(
         90deg,
@@ -63,61 +67,6 @@ html p {
     var(--dot-color);
 }
 
-.stripped:active {
-  --dot-color: color-mix(in srgb, currentColor 50%, transparent);
-
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 3px,
-    transparent 5px,
-    var(--dot-color) 5px,
-    var(--dot-color) 7px
-  );
-}
-
-.hashed:active {
-  --dot-color: color-mix(in srgb, currentColor 70%, transparent);
-
-  background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 3px,
-      transparent 5px,
-      var(--dot-color) 5px,
-      var(--dot-color) 7px
-    ),
-    repeating-linear-gradient(
-      135deg,
-      transparent,
-      transparent 3px,
-      transparent 5px,
-      var(--dot-color) 5px,
-      var(--dot-color) 7px
-    );
-}
-
-.crossed:active {
-  --dot-color: color-mix(in srgb, currentColor 50%, transparent);
-
-  background: repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 1px,
-      transparent 5px,
-      var(--dot-color) 5px,
-      var(--dot-color) 7px
-    ),
-    repeating-linear-gradient(
-      180deg,
-      transparent,
-      transparent 1px,
-      transparent 5px,
-      var(--dot-color) 5px,
-      var(--dot-color) 7px
-    );
-}
-
 .shadow-box:hover {
   -webkit-box-shadow: -8px 8px 0px 0px currentColor;
   -moz-box-shadow: -8px 8px 0px 0px currentColor;
@@ -130,13 +79,10 @@ html p {
   box-shadow: -4px 4px 0px 0px currentColor;
 }
 
-.outline-container:hover {
-  @apply outline outline-offset-8 outline-2 outline-[currentColor] transition-all;
+.outline-container {
+  @apply outline outline-offset-8 outline-1 outline-[currentColor] transition-all;
 }
 
-.outline-container:active {
-  @apply outline-offset-4;
-}
 /* 
 div {
   @apply outline outline-1;

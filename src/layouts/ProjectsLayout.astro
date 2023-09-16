@@ -14,14 +14,18 @@ const { frontmatter } = Astro.props;
   <BlogHeading
     title={frontmatter.title}
     subtitle={frontmatter.description}
-    primary=" text-red-500"
-    secondary=" text-green-500"
+    colour="text-frost"
     index={frontmatter.id}
   />
   <Spacer />
-  <div class="flex items-center gap-4 mb-10">
+  <div class="flex items-center gap-4 mb-10 text-frost">
     <p>{frontmatter.pubDate.slice(0, 10)}</p>
-    <Button href={frontmatter.url} content="Github url" />
+    <Button href={frontmatter.gitUrl} content="Github repo" blank />
+    {
+      frontmatter.preview && (
+        <Button href={frontmatter.preview} content="Preview" blank />
+      )
+    }
   </div>
 
   <slot />

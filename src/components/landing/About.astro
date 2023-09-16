@@ -1,99 +1,70 @@
 ---
-import { Image } from "astro:assets";
 import Spacer from "../utils/Spacer.astro";
-import Button from "../ui/Button.astro";
+import Heading from "../ui/Heading.astro";
+import Profile from "../ui/Profile.astro";
 ---
 
-<section id="about" class="text-white mx-auto scroll-mt-20">
-  <div
-    class="md:flex my-10 justify-center items-center gap-6 space-y-6 md:space-y-0"
-  >
-    <div class="flex-1 text-seafoam outline-container crossed py-8 group">
-      <p class="text-justify">
-        This should be some small but concise info about myself ig.
-      </p>
-    </div>
-    <div class="md:w-[40%] text-tokyo outline-container stripped">
-      <h1 transition:name="about">About Me.</h1>
-    </div>
-  </div>
+<section id="about" class="scroll-mt-20">
+  <Heading
+    title="About Me."
+    subtitle="Weaving tales of data and functionality with every line of code."
+    colour="text-frost"
+    index="about"
+  />
 
   <Spacer />
 
-  <div
-    class="md:flex justify-center items-stretch gap-6 space-y-6 md:space-y-0"
-  >
-    <div class="flex-1">
-      <div id="profile" class="outline-container text-green-400">
-        <Image
-          height={300}
-          width={300}
-          src="https://avatars.githubusercontent.com/u/78863729?v=4"
-          alt="pfp"
-          class="rounded-full h-full w-full dotted p-2 text-green-400"
-        />
-        <div class="my-4 sapce-y-2">
-          <h2>My name is Philipp S.</h2>
-          <h4 class="text-whisper">AKA embersee</h4>
-          <h4 class="text-whisper">
-            some text about me or my current status from discord live presense
-          </h4>
-        </div>
-        <div id="links" class="flex justify-between">
-          <div class="text-purple-500">
-            <Button href="mailto:embersee@proton.me" content="Email" blank />
-          </div>
+  <div class="md:flex gap-6 space-y-6 md:space-y-0">
+    <div class="flex-1 space-y-20">
+      <ul>
+        <li><h3>Employment:</h3></li>
+        <li>
+          <span>04/23 – 09/23:</span> Working at "St. Petersburg Information
+          Analytical Center" solo-leading development for an internal management
+          system for the HR dept.
+        </li>
+        <li>
+          <span>Currently:</span>Looking for freelance work / job opportunities!
+        </li>
+      </ul>
 
-          <div class="text-blue-500">
-            <Button
-              href="https://telegram.me/embersee"
-              content="Telegram"
-              blank
-            />
-          </div>
+      <ul>
+        <li><h3>Education:</h3></li>
+        <li>
+          <span>09/23 - Present:</span> Studying at SPbETU "LETI" in Computer
+          Security.
+        </li>
 
-          <div class="text-orange-500">
-            <Button href="https://github.com/embersee" content="Github" blank />
-          </div>
-        </div>
+        <li>
+          <span>09/19 – 07/23:</span> Graduated from "Petrovsky College"
+          studying Information systems and databases.
+        </li>
+      </ul>
+
+      <div class="space-y-4">
+        <h3>tl;dr:</h3>
+        <p>
+          i'm a web developer, mainly interested in working on frontend /
+          fullstack applications.
+        </p>
       </div>
     </div>
-
-    <div
-      class="md:w-[60%] flex flex-col items-end outline-container text-brick"
-    >
-      <div class="space-y-4 flex-grow">
-        <h2>
-          Purpose-driven product designer who loves crafting unique, yet
-          engaging solution that tackles fundamental problem
-        </h2>
-
-        <p>
-          Highly interested to work on digital products in early-stage or even
-          newly-founded startup that are oriented towards empowering the lives
-          of many people.
-        </p>
-        <p>
-          I can help in designing end-to-end product experience using design
-          thinking framework, no-code experimentation for product validation,
-          and suggesting product strategy based on customer-centered product
-          research.
-        </p>
-        <p>
-          One of the biggest risks of building a product is to build the wrong
-          thing. We need to figure out first whether the problem is a real one
-          that needs solving.
-        </p>
-      </div>
-      <div class="self-end">
-        <Button href="/about" content="see more" />
-      </div>
+    <div class="md:w-[40%]">
+      <Profile />
     </div>
   </div>
-</section>
 
-<style>
-  a {
-    @apply text-tokyo hover:underline;
-  }
-</style>
+  <style>
+    span {
+      @apply whitespace-nowrap mr-4;
+    }
+
+    li {
+      @apply md:flex text-justify;
+    }
+
+    ul {
+      @apply space-y-4;
+    }
+  </style>
+</section>

@@ -4,41 +4,31 @@ interface Props {
   title: string;
   desc: string;
   href?: string;
-  stack?: string[];
+  preview?: boolean;
   wip?: boolean;
   index: number;
 }
 
-const { href, title, desc, wip, index } = Astro.props;
+const { href, title, desc, preview, wip, index } = Astro.props;
 ---
 
 <li
   class="group project-card shadow-box p-2"
   transition:name=`project-${index}`
 >
-  <a class="text-white" href={href}>
+  <a href={href}>
     <div class="grow">
       <div class="flex">
         <h2 transition:name=`blog-title-${index}`>
           {title}
-          <!-- {`blog-title-${index}`} ### DEBBUGING VIEW TRANSITIONS -->
         </h2>
         <div class="flex justify-end gap-2 w-full">
           {wip && <p>#WIP</p>}
-          {!href && <p>#SOON</p>}
-          {
-            href && (
-              <>
-                <p class="group-hover:underline decoration-yellow-300">
-                  PREVIEW
-                </p>
-                <LinkArrow height={24} width={24} />
-              </>
-            )
-          }
+
+          <LinkArrow height={24} width={24} />
         </div>
       </div>
-      <p class="text-whisper" transition:name=`blog-desc-${index}`>
+      <p class="text-whisper py-2" transition:name=`blog-desc-${index}`>
         {desc}
       </p>
     </div>

@@ -2,14 +2,16 @@
 id: 3
 layout: ../../layouts/ProjectsLayout.astro
 title: "Embersee"
-pubDate: 2022-09-15
-description: "Astro portfolio website."
+pubDate: 2023-09-15
+description: "This portfolio website. Made with Astro."
 author: "Astro Learner"
-url: "https://github.com/embersee/embersee"
+gitUrl: "https://github.com/embersee/embersee"
+preview: 
 image:
   url: ""
   alt: "The Astro logo with the word One."
 tags: ["astro", "blogging", "learning in public"]
+wip: true
 ---
 
 ### Hello World Embersee!

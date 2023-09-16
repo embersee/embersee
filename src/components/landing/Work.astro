@@ -1,6 +1,7 @@
 ---
 import Button from "../ui/Button.astro";
 import Heading from "../ui/Heading.astro";
+import MyStack from "../ui/MyStack.astro";
 import ProjectCard from "../ui/ProjectCard.astro";
 import Spacer from "../utils/Spacer.astro";
 const allProjects = await Astro.glob("../../pages/project/*.md");
@@ -10,61 +11,36 @@ const allProjects = await Astro.glob("../../pages/project/*.md");
   <Heading
     title="Selected Works."
     subtitle="I love storytelling through exploring unique design interfaces."
-    primary=" text-babyblue"
-    secondary=" text-matcha"
-    index={1}
+    colour="text-frost"
+    index="work"
   />
 
   <Spacer />
 
   <div class="md:flex gap-6 space-y-10 md:space-y-0">
-    <ul class="flex-1 flex flex-col items-end space-y-6 text-yellow-300">
-      {
-        allProjects
-          .slice(0, 4)
-          .map((project) => (
-            <ProjectCard
-              href={project.url}
-              title={project.frontmatter.title}
-              desc={project.frontmatter.description}
-              index={project.frontmatter.id}
-            />
-          ))
-      }
-      {}
-
-      <Button href="/projects" content="see more projects" />
-    </ul>
-    <div
-      class="md:w-[40%] flex flex-col items-end space-y-4
-    outline-container text-babycarrot group"
-    >
-      <ul class="space-y-6 font-light text-white flex-grow">
-        <h2>Education / Employment</h2>
-        <li>
-          &diams; Currently: Looking for freelance work / job opportunities!
-        </li>
-        <li>
-          &diams; 09/2023 - Present: Studying at SPbETU "LETI" in <strong
-            class="group-hover:text-babycarrot">Computer Security</strong
-          >.
-        </li>
-        <li>
-          &diams; 04/2023 – 09/2023: Working at "St. Petersburg Information
-          Analytical Center" <strong class="group-hover:text-babycarrot"
-            >solo-leading development</strong
-          > for an internal management system for the HR dept.
-        </li>
-        <li>
-          &diams; 09/2019 – 07/2023: Graduated from "Petrovsky College" studying
-
-
-          <strong class="group-hover:text-babycarrot"
-            >Information systems and databases</strong
-          >.
-        </li>
+    <div class="flex-1 flex flex-col justify-end text-frost">
+      <ul class="space-y-6">
+        {
+          allProjects
+            .slice(0, 4)
+            .map((project) => (
+              <ProjectCard
+                href={project.url}
+                title={project.frontmatter.title}
+                desc={project.frontmatter.description}
+                index={project.frontmatter.id}
+                wip={project.frontmatter.wip}
+              />
+            ))
+        }
       </ul>
-      <Button href="/experience" content="download cv" />
+
+      <div class="self-end pt-6">
+        <Button href="/projects" content="see more projects" />
+      </div>
+    </div>
+    <div class="md:w-[40%]">
+      <MyStack />
     </div>
   </div>
 </section>

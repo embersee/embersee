@@ -1,20 +1,20 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 interface Props {
+  index: number | string;
   title: string;
   subtitle?: string;
-  primary: HTMLAttributes<"div">["class"];
-  secondary: HTMLAttributes<"div">["class"];
-  index: number;
+  colour?: HTMLAttributes<"div">["class:list"];
 }
-const { title, subtitle, primary, secondary, index } = Astro.props;
+const { title, subtitle, colour, index } = Astro.props;
 ---
 
-<div class="md:flex justify-center items-center gap-6 space-y-6 md:space-y-0">
-  <div class={primary + ` flex-1 outline-container hashed`}>
-    <h1 transition:name=`blog-title-${index}`>{title}</h1>
-  </div>
-  <div class={secondary + ` group md:w-[40%] outline-container dotted py-8`}>
+<div
+  class="flex md:flex-row flex-col justify-between items-center gap-6"
+  transition:name=`heading-${index}`
+>
+  <h1 transition:name=`blog-title-${index}`>{title}</h1>
+  <div class={colour + ` p-6 md:w-[40%] dotted`}>
     <p class="text-justify" transition:name=`blog-desc-${index}`>
       {subtitle}
     </p>

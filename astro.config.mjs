@@ -1,18 +1,22 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-
 import vercelStatic from "@astrojs/vercel/static";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind({ applyBaseStyles: false })],
+  site: "https://embersee.vercel.app",
+  integrations: [tailwind({
+    applyBaseStyles: false
+  }), sitemap()],
   output: "static",
   adapter: vercelStatic({
     webAnalytics: {
-      enabled: true,
+      enabled: true
     },
     speedInsights: {
-      enabled: true,
-    },
-  }),
+      enabled: true
+    }
+  })
 });

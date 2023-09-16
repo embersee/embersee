@@ -1,0 +1,21 @@
+{
+  "name": "Embersee portfolio",
+  "short_name": "embersee",
+  "description": "Philipp S' personal portfolio",
+  "icons": [
+    {
+      "src": "/favicons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicons/favicon-32x32.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#000000",
+  "theme_color": "#090909",
+  "display": "standalone"
+}

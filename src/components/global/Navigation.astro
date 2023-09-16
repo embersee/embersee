@@ -1,58 +1,20 @@
 <nav>
   <div class="flex h-16 justify-between items-center px-10">
-    <a href="/">2023 // EMBERSEE</a>
+    <a href="/">https://embersee.net</a>
     <!-- <p class="hidden md:block">SAINT-PETERSBURG <span id="time"></span></p>
     <p class="hidden md:block">STATUS: <span id="status">OFFLINE</span></p> -->
     <div class="space-x-2 hidden md:block">
-      <a href="#work">WORK</a><span>/</span><a href="#about">ABOUT</a>
+      <a href="/projects">WORK</a><span>/</span><a href="/#about">ABOUT</a>
     </div>
   </div>
 </nav>
 
 <style>
   nav {
-    @apply bg-black/30 sticky top-0 z-50 text-white backdrop-blur backdrop-hue-rotate-90;
+    @apply bg-night/30 sticky top-0 z-50 text-white backdrop-blur backdrop-hue-rotate-90;
   }
 
   a:hover {
     @apply underline;
   }
 </style>
-
-<!-- <script>
-  const status = document.getElementById("status");
-  const {
-    data: { discord_status },
-  } = await fetch("https://api.lanyard.rest/v1/users/172988196051746816").then(
-    (res) => res.json()
-  );
-
-  if (discord_status && status) {
-    console.log();
-    status.innerHTML = (discord_status as string).toUpperCase() || "";
-  }
-</script> -->
-
-<!-- <script>
-  function startTime() {
-    const today = new Date();
-    let h = today.getHours();
-    let m = today.getMinutes();
-    let s = today.getSeconds();
-    let ms: string = checkTime(m);
-    let ss: string = checkTime(s);
-    const timeEl = document.getElementById("time");
-    if (!timeEl) return;
-    timeEl.innerHTML = h + ":" + m + ":" + s;
-    setTimeout(startTime, 1000);
-  }
-
-  function checkTime(i: number) {
-    if (i < 10) {
-      return "0" + i;
-    } // add zero in front of numbers < 10
-    return i + "";
-  }
-
-  startTime();
-</script> -->

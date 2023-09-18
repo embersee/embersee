@@ -32,7 +32,7 @@ main {
 }
 
 html h1 {
-  @apply md:font-bold text-5xl text-white;
+  @apply md:font-bold text-6xl text-white;
 }
 
 html h2 {

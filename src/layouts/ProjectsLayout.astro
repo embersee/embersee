@@ -28,6 +28,15 @@ const { frontmatter } = Astro.props;
     }
   </div>
 
-  <slot />
+  <div class="blog-content">
+    <slot class="blog-content" />
+  </div>
+
   <Spacer />
 </BaseLayout>
+
+<style>
+  .blog-content {
+    @apply flex flex-col gap-6;
+  }
+</style>

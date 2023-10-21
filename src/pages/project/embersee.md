@@ -15,3 +15,5 @@ wip: true
 ---
 
 ### Hello World Embersee!
+
+This website was made using Astro + Tailwind. Probably the best combination for swift development, it's just so nice.

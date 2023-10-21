@@ -14,4 +14,4 @@ tags: ["astro", "blogging", "learning in public"]
 wip: true
 ---
 
-### Hello World Delphox!
+### Delphox is a platform i am currently building. More information will appear here as the project continues to develop. Stay tuned.

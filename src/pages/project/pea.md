@@ -14,6 +14,6 @@ tags: ["astro", "blogging", "learning in public"]
 wip: false
 ---
 
-### Hello World Pea!
+### peaeeter.com is a website for my dear friend Matthew, he was one of the reasons I started my journey in frontend development. 
 
-asd jgjoisdgj 
+The website currently just plays a video.

@@ -1,37 +1,33 @@
-import cn from "clsx";
-import levaTheme from "@/config/leva";
 import { Leva } from "leva";
 import { useStore } from "@/lib/store";
-import s from "./gui.module.scss";
 
 export function GUI() {
   const [gui, setGui] = useStore(({ gui, setGui }) => [gui, setGui]);
 
   return (
-    <div className={cn(s.gui, gui && s.open)}>
+    <div className="hidden">
       <button
-        className={s.toggle}
         onClick={() => {
           setGui(!gui);
         }}
       ></button>
-      <header className={s.title}>
+      <header>
         <h1>ANISO_ASCII_TOOL</h1>
       </header>
-      <div className={s.main}>
-        <div className={s.leva}>
+      <div>
+        <div>
           <Leva
             isRoot
             fill
             flat
             titleBar={false}
-            theme={levaTheme}
+            // theme={levaTheme}
             hideCopyButton
             // neverHide
             collapsed={false}
           />
         </div>
-        <div className={s.description}>
+        <div>
           <p>
             the Aniso ascii tool is an open-source ASCII tool built by{" "}
             <a href="https://studiofreight.com">Studio Freight</a> to generate
@@ -43,7 +39,7 @@ export function GUI() {
             <br /> .glb, .mp4, .mov, .webm, .png, .webp, .avif
           </p>
         </div>
-        <div className={s.links}>
+        <div>
           <a
             target="_blank"
             rel="noopener noreferrer"

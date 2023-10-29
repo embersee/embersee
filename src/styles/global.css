@@ -44,10 +44,10 @@ html h3 {
 }
 
 html p {
-  @apply font-light text-white ;
+  @apply font-light text-white;
 }
 
-.dotted{
+.dotted {
   --dot-bg: black;
   --dot-color: color-mix(in srgb, currentColor 50%, transparent);
   --dot-size: 1px;
@@ -87,3 +87,18 @@ html p {
 div {
   @apply outline outline-1;
 } */
+
+.ascii {
+  display: flex;
+  height: 100vh;
+}
+
+.canvas {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -100;
+}

@@ -1,7 +1,6 @@
 import { AsciiContext } from "@/components/ascii/context";
 import { useContext, useEffect, useMemo, useRef } from "react";
 import { CanvasTexture, NearestFilter, RepeatWrapping } from "three";
-import s from "./font-editor.module.scss";
 
 export function FontEditor() {
   const el = useRef();
@@ -88,7 +87,7 @@ export function FontEditor() {
   }, [characters, context, charactersLimit, invert, fontSize]);
 
   return (
-    <div ref={el} className={s.font}>
+    <div ref={el}>
       {/* <input
         value={characters}
         onKeyDown={({}) => {

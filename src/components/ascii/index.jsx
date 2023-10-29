@@ -12,7 +12,6 @@ import { AnimationMixer, Group, MeshNormalMaterial } from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import tunnel from "tunnel-rat";
-import s from "./ascii.module.scss";
 import { AsciiContext } from "./context";
 import { GUI } from "@/components/utils/gui";
 
@@ -161,9 +160,9 @@ function Inner() {
 
   return (
     <>
-      <div className={s.ascii}>
+      <div className="ascii">
         <GUI />
-        <div className={cn(s.canvas)}>
+        <div className="canvas">
           <Canvas
             flat
             linear

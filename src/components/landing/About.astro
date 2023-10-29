@@ -16,7 +16,7 @@ import Profile from "../ui/Profile.astro";
 
   <div class="md:flex gap-6 space-y-6 md:space-y-0">
     <div class="flex-1 space-y-20">
-      <ul>
+      <ul class="bg-night/30 backdrop-blur-sm p-4">
         <li><h3>Employment:</h3></li>
         <li>
           <span>04/23 – 09/23:</span> Working at "St. Petersburg Information
@@ -28,7 +28,7 @@ import Profile from "../ui/Profile.astro";
         </li>
       </ul>
 
-      <ul>
+      <ul class="bg-night/30 backdrop-blur-sm p-4">
         <li><h3>Education:</h3></li>
         <li>
           <span>09/23 - Present:</span> Studying at SPbETU "LETI" in Computer
@@ -41,7 +41,7 @@ import Profile from "../ui/Profile.astro";
         </li>
       </ul>
 
-      <div class="space-y-4">
+      <div class="space-y-4 bg-night/30 backdrop-blur-sm p-4">
         <h3>tl;dr:</h3>
         <p>
           i'm a web developer, mainly interested in working on frontend /
@@ -60,7 +60,7 @@ import Profile from "../ui/Profile.astro";
     }
 
     li {
-      @apply md:flex text-justify;
+      @apply md:flex;
     }
 
     ul {

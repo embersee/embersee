@@ -10,6 +10,7 @@ const { frontmatter } = Astro.props;
 
 <BaseLayout title={frontmatter.title}>
   <Spacer />
+
   <Back href="/" />
   <BlogHeading
     title={frontmatter.title}
@@ -17,7 +18,7 @@ const { frontmatter } = Astro.props;
     colour="text-frost"
     index={frontmatter.id}
   />
-  <Spacer />
+  <!-- <Spacer /> -->
   <div class="flex items-center gap-4 mb-10 text-frost">
     <p>{frontmatter.pubDate.slice(0, 10)}</p>
     <Button href={frontmatter.gitUrl} content="Github repo" blank />

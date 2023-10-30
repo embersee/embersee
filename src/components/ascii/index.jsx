@@ -1,14 +1,18 @@
 import { OrbitControls, useContextBridge } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
-import cn from "clsx";
 import { ASCIIEffect } from "@/components/utils/ascii-effect/index";
 import { FontEditor } from "@/components/utils/font-editor";
 import { useControls } from "leva";
 import { text } from "@/lib/leva/text";
 
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { AnimationMixer, Group, MeshNormalMaterial } from "three";
+import {
+  AnimationMixer,
+  Group,
+  LoadingManager,
+  MeshNormalMaterial,
+} from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import tunnel from "tunnel-rat";
@@ -22,8 +26,25 @@ function Scene() {
 
   const [asset, setAsset] = useState("/dragonfly.glb");
 
+  const loadingManager = new LoadingManager();
+
+  loadingManager.onStart = (url) => {
+    console.log("started: ", url);
+  };
+
+  loadingManager.onProgress = (url, loaded, total) => {
+    const progressBar = document.getElementById("progress-bar");
+
+    progressBar.value = (loaded / total) * 100;
+  };
+
+  loadingManager.onLoad = () => {
+    const progressContainer = document.getElementById("progress-container");
+    progressContainer.style.display = "none";
+  };
+
   const gltfLoader = useMemo(() => {
-    const loader = new GLTFLoader();
+    const loader = new GLTFLoader(loadingManager);
 
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath(
@@ -41,37 +62,31 @@ function Scene() {
   });
 
   const gltf = useMemo(() => {
-    if (!asset) return;
     let src = asset;
 
-    if (
-      src.startsWith("data:application/octet-stream;base64") ||
-      src.includes(".glb")
-    ) {
-      const group = new Group();
+    const group = new Group();
 
-      gltfLoader.load(src, ({ scene, animations }) => {
-        const mixer = new AnimationMixer(scene);
-        setMixer(mixer);
-        const clips = animations;
+    gltfLoader.load(src, ({ scene, animations }) => {
+      const mixer = new AnimationMixer(scene);
+      setMixer(mixer);
+      const clips = animations;
 
-        clips.forEach((clip) => {
-          mixer.clipAction(clip).play();
-        });
-
-        group.add(scene);
-        scene.traverse((mesh) => {
-          mesh.material = new MeshNormalMaterial();
-        });
+      clips.forEach((clip) => {
+        mixer.clipAction(clip).play();
       });
 
-      return group;
-    }
+      group.add(scene);
+      scene.traverse((mesh) => {
+        mesh.material = new MeshNormalMaterial();
+      });
+    });
+
+    return group;
   }, [asset]);
 
   const { viewport, camera } = useThree();
 
-  camera.position.set(500, 550, 1500);
+  camera.position.set(1500, 550, 1500);
 
   camera.updateProjectionMatrix();
 
@@ -86,7 +101,7 @@ function Scene() {
       let winHeight = window.innerHeight;
       let scrollPercent = scrollTop / (docHeight - winHeight);
       let scrollPercentRounded = Math.round(scrollPercent * 100);
-      setOffset(scrollPercentRounded / 100);
+      setOffset((scrollPercentRounded * 2) / 100);
     };
     // clean up code
     window.removeEventListener("scroll", onScroll);
@@ -95,14 +110,18 @@ function Scene() {
   }, []);
 
   // console.log(offset);
-  set({ time: offset });
+  set({
+    time: offset,
+    // fontSize: offset * 70 + 40,
+    // granularity: offset * 10,
+  });
 
   return (
     <>
       <group ref={ref}>
         {gltf && (
           <>
-            <OrbitControls enabled={false} autoRotate enableZoom={false} />
+            <OrbitControls enableZoom={false} />
 
             <group scale={200}>
               <primitive object={gltf} />

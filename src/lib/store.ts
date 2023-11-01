@@ -8,7 +8,7 @@ type Action = {
   setGui: (gui: boolean) => void;
 };
 
-export const useStore = create<State & Action>((set, get) => ({
-  gui: true,
+export const useGui = create<State & Action>((set, get) => ({
+  gui: false,
   setGui: (gui: boolean) => set({ gui }),
 }));

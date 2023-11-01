@@ -3,7 +3,6 @@ import {
   useContextBridge,
   ScrollControls,
   useScroll,
-  useGLTF,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
@@ -11,7 +10,7 @@ import { ASCIIEffect } from "@/components/utils/ascii-effect/index";
 import { FontEditor } from "@/components/utils/font-editor";
 import { useControls } from "leva";
 import { text } from "@/lib/leva/text";
-
+import { useGui } from "@/lib/store";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   AnimationMixer,
@@ -30,6 +29,8 @@ const ui = tunnel();
 
 function Scene() {
   const ref = useRef();
+
+  const { gui } = useGui();
 
   const [asset, setAsset] = useState("/Porsche_Carrera_GT_2003.glb");
 
@@ -90,7 +91,6 @@ function Scene() {
 
     return group;
   }, [asset]);
-  const [offset, setOffset] = useState(0);
 
   const { viewport, camera, scene } = useThree();
 
@@ -113,34 +113,44 @@ function Scene() {
   useFrame((state, delta) => {
     const r1 = scroll.range(0 / 5, 1 / 5);
     const r2 = scroll.range(1 / 5, 4 / 5);
-    const r3 = scroll.range(3 / 5, 4 / 5);
-
+    const r3 = scroll.range(2 / 5, 3 / 5);
     const r4 = scroll.range(4 / 5, 1 / 5);
+    const r5 = scroll.range(9 / 10, 1 / 10);
 
+    // Break down each rotation component
+    const initialRotation = Math.PI;
+    const r1Rotation = (Math.PI / 2) * rsqw(r1);
+    const r2Rotation = r2 * Math.PI;
+    const constantRotation = Math.PI / 2;
+    const r3Rotation = r3 * Math.PI * rsqw(r3);
+
+    // Combine all components for the final rotation value
     model.current.rotation.y =
-      Math.PI -
-      (Math.PI / 2) * rsqw(r1) -
-      r2 * Math.PI -
-      Math.PI / 2 -
-      r4 * Math.PI * rsqw(r4);
+      initialRotation - r1Rotation - r2Rotation - constantRotation - r3Rotation;
 
-    ref.current.scale.x =
-      ref.current.scale.y =
-      ref.current.scale.z =
-        MathUtils.damp(
-          ref.current.scale.z,
-          1 + 0.54 * (1 - rsqw(r1 + r4 + r3)),
-          3,
-          delta,
-        );
+    let targetScale = 1 + 0.54 * (1 - rsqw(r1) + r3 * 2); // Adjust this as per your zoom out requirement
 
-    set({ time: r4 });
+    const dampenedScale = MathUtils.damp(
+      ref.current.scale.z,
+      targetScale,
+      4,
+      delta,
+    );
+
+    ref.current.scale.x = dampenedScale;
+    ref.current.scale.y = dampenedScale;
+    ref.current.scale.z = dampenedScale;
+
+    set({
+      time: r4,
+      charactersLimit: DEFAULT.charactersLimit - r5 * 11,
+    });
   });
 
   return (
     <>
       <group ref={ref}>
-        <OrbitControls enableZoom={false} />
+        <OrbitControls enabled={gui} enableZoom={false} />
 
         <group ref={model} scale={200}>
           <primitive object={gltf} />
@@ -183,7 +193,7 @@ function Postprocessing() {
         charactersLimit={charactersLimit}
         fillPixels={fillPixels}
         color={color}
-        fit={fit}
+        fit={true}
         greyscale={greyscale}
         invert={invert}
         matrix={matrix}
@@ -216,7 +226,7 @@ function Inner() {
               powerPreference: "high-performance",
             }}
           >
-            <ScrollControls pages={12}>
+            <ScrollControls pages={8}>
               <ContextBridge>
                 <Scene />
                 <Postprocessing />
@@ -265,7 +275,6 @@ export function ASCII() {
       fillPixels,
       setColor,
       color,
-      fit,
       greyscale,
       invert,
       matrix,
@@ -279,7 +288,6 @@ export function ASCII() {
       characters: text(
         initialUrlParams.get("characters") || DEFAULT.characters,
       ),
-
       granularity: {
         min: 4,
         max: 32,
@@ -314,9 +322,7 @@ export function ASCII() {
           initialUrlParams.get("fillPixels") === "true" || DEFAULT.fillPixels,
         label: "fill pixels",
       },
-      fit: {
-        value: initialUrlParams.get("fit") || DEFAULT.fit,
-      },
+
       matrix: {
         value: initialUrlParams.get("matrix") === "true" || DEFAULT.matrix,
       },
@@ -376,7 +382,7 @@ export function ASCII() {
           fontSize,
           fillPixels,
           color: setColor ? color : undefined,
-          fit,
+          fit: true,
           greyscale,
           invert,
           matrix,

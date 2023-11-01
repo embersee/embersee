@@ -22,7 +22,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ["Martian Mono", ...defaultTheme.fontFamily.sans],
+      sans: ["Geist Mono", ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [

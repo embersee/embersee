@@ -22,10 +22,10 @@ main {
   /* martian-mono-regular - latin */
   @font-face {
     font-display: block;
-    font-family: "Martian Mono";
+    font-family: "Geist Mono";
     font-style: normal;
     font-weight: 400;
-    src: url("/fonts/martian-mono-v3-latin-regular.woff2") format("woff2");
+    src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
   }
 }
 
@@ -108,4 +108,8 @@ div {
   right: 0;
 
   @apply snap-center;
+}
+
+.experiments:hover {
+  @apply text-matcha;
 }

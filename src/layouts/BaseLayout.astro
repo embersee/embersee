@@ -3,6 +3,7 @@ import BaseHead from "@/components/utils/BaseHead.astro";
 import { ViewTransitions } from "astro:transitions";
 import Navigation from "@/components/global/Navigation.astro";
 import Footer from "@/components/global/Footer.astro";
+import { ASCII } from "@/components/ascii";
 
 interface Props {
   title?: string;
@@ -14,10 +15,12 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={title} />
-    <ViewTransitions fallback="swap" />
+    <!-- <ViewTransitions fallback="swap" /> -->
   </head>
   <body class="mx-auto bg-black text-white">
     <Navigation />
+
+    <ASCII client:only="react" />
     <main id="index" class="max-w-7xl min-h-screen mx-auto px-4">
       <slot />
     </main>

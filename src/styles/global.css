@@ -10,6 +10,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  overscroll-behavior: none;
+}
+
 main {
   @apply selection:bg-babycarrot;
 }
@@ -25,11 +29,11 @@ main {
   }
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   html {
     zoom: 0.8;
   }
-}
+} */
 
 html h1 {
   @apply md:font-bold text-6xl text-white;
@@ -91,14 +95,17 @@ div {
 .ascii {
   display: flex;
   height: 100vh;
+
+  @apply snap-both snap-mandatory;
 }
 
 .canvas {
   width: 100%;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: -100;
+
+  @apply snap-center;
 }

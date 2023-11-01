@@ -3,20 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Work from "@/components/landing/Work.astro";
 import About from "@/components/landing/About.astro";
 import Spacer from "@/components/utils/Spacer.astro";
-import { ASCII } from "@/components/ascii";
 import Loading from "@/components/global/Loading.astro";
-// import Hero from "@/components/ascii";
 ---
 
 <BaseLayout>
   <Loading />
-  <Spacer />
-  <div class="flex h-screen">
-    <div><h1>Hello my namme is ... and i do ... etc ...</h1></div>
-    <div>
-      <ASCII client:only="react" />
-    </div>
-  </div>
+  <!-- <Spacer /> -->
 
   <Spacer />
   <Work />

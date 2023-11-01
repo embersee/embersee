@@ -1,4 +1,10 @@
-import { OrbitControls, useContextBridge } from "@react-three/drei";
+import {
+  OrbitControls,
+  useContextBridge,
+  ScrollControls,
+  useScroll,
+  useGLTF,
+} from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
 import { ASCIIEffect } from "@/components/utils/ascii-effect/index";
@@ -12,6 +18,7 @@ import {
   Group,
   LoadingManager,
   MeshNormalMaterial,
+  MathUtils,
 } from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -24,7 +31,7 @@ const ui = tunnel();
 function Scene() {
   const ref = useRef();
 
-  const [asset, setAsset] = useState("/dragonfly.glb");
+  const [asset, setAsset] = useState("/Porsche_Carrera_GT_2003.glb");
 
   const loadingManager = new LoadingManager();
 
@@ -83,55 +90,68 @@ function Scene() {
 
     return group;
   }, [asset]);
+  const [offset, setOffset] = useState(0);
 
-  const { viewport, camera } = useThree();
+  const { viewport, camera, scene } = useThree();
 
-  camera.position.set(1500, 550, 1500);
+  const defCamera = {
+    x: 1500,
+    y: 550,
+    z: 1500,
+  };
+
+  camera.position.set(defCamera.x, defCamera.y, defCamera.z);
 
   camera.updateProjectionMatrix();
 
   const { set } = useContext(AsciiContext);
 
-  const [offset, setOffset] = useState(0);
+  const model = useRef();
 
-  useEffect(() => {
-    const onScroll = () => {
-      let scrollTop = window.scrollY;
-      let docHeight = document.body.offsetHeight;
-      let winHeight = window.innerHeight;
-      let scrollPercent = scrollTop / (docHeight - winHeight);
-      let scrollPercentRounded = Math.round(scrollPercent * 100);
-      setOffset((scrollPercentRounded * 2) / 100);
-    };
-    // clean up code
-    window.removeEventListener("scroll", onScroll);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const scroll = useScroll();
 
-  // console.log(offset);
-  set({
-    time: offset,
-    // fontSize: offset * 70 + 40,
-    // granularity: offset * 10,
+  useFrame((state, delta) => {
+    const r1 = scroll.range(0 / 5, 1 / 5);
+    const r2 = scroll.range(1 / 5, 4 / 5);
+    const r3 = scroll.range(3 / 5, 4 / 5);
+
+    const r4 = scroll.range(4 / 5, 1 / 5);
+
+    model.current.rotation.y =
+      Math.PI -
+      (Math.PI / 2) * rsqw(r1) -
+      r2 * Math.PI -
+      Math.PI / 2 -
+      r4 * Math.PI * rsqw(r4);
+
+    ref.current.scale.x =
+      ref.current.scale.y =
+      ref.current.scale.z =
+        MathUtils.damp(
+          ref.current.scale.z,
+          1 + 0.54 * (1 - rsqw(r1 + r4 + r3)),
+          3,
+          delta,
+        );
+
+    set({ time: r4 });
   });
 
   return (
     <>
       <group ref={ref}>
-        {gltf && (
-          <>
-            <OrbitControls enableZoom={false} />
+        <OrbitControls enableZoom={false} />
 
-            <group scale={200}>
-              <primitive object={gltf} />
-            </group>
-          </>
-        )}
+        <group ref={model} scale={200}>
+          <primitive object={gltf} />
+        </group>
       </group>
     </>
   );
 }
+
+const rsqw = (t, delta = 0.2, a = 1, f = 1 / (2 * Math.PI)) =>
+  (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
 
 function Postprocessing() {
   const { gl, viewport } = useThree();
@@ -196,10 +216,12 @@ function Inner() {
               powerPreference: "high-performance",
             }}
           >
-            <ContextBridge>
-              <Scene />
-              <Postprocessing />
-            </ContextBridge>
+            <ScrollControls pages={12}>
+              <ContextBridge>
+                <Scene />
+                <Postprocessing />
+              </ContextBridge>
+            </ScrollControls>
           </Canvas>
         </div>
       </div>
@@ -211,7 +233,7 @@ function Inner() {
 
 const DEFAULT = {
   characters: " . */^e.m.b.r",
-  granularity: 8,
+  granularity: 6,
   charactersLimit: 12,
   fontSize: 72,
   fillPixels: false,
@@ -219,7 +241,7 @@ const DEFAULT = {
   color: "#ffffff",
   background: "#000000",
   greyscale: false,
-  invert: false,
+  invert: true,
   matrix: true,
   setTime: true,
   time: 0,

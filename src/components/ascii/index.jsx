@@ -152,7 +152,7 @@ function Scene() {
       <group ref={ref}>
         <OrbitControls enabled={gui} enableZoom={false} />
 
-        <group ref={model} scale={200}>
+        <group ref={model} scale={200} position={-100}>
           <primitive object={gltf} />
         </group>
       </group>
@@ -245,7 +245,7 @@ const DEFAULT = {
   characters: " . */^e.m.b.r",
   granularity: 6,
   charactersLimit: 12,
-  fontSize: 72,
+  fontSize: 86,
   fillPixels: false,
   setColor: false,
   color: "#ffffff",

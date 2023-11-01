@@ -6,11 +6,9 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
+  height: 100vh;
+  overflow: hidden;
   overscroll-behavior: none;
 }
 
@@ -18,8 +16,25 @@ main {
   @apply selection:bg-babycarrot;
 }
 
+.snap-container {
+  scroll-behavior: smooth;
+  overflow: scroll;
+  height: 100vh;
+  scroll-snap-points-y: repeat(100vh);
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  @apply max-w-5xl mx-auto;
+}
+
+.snap {
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+}
+
 @layer base {
-  /* martian-mono-regular - latin */
   @font-face {
     font-display: block;
     font-family: "Geist Mono";
@@ -28,12 +43,6 @@ main {
     src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
   }
 }
-
-/* @media (min-width: 768px) {
-  html {
-    zoom: 0.8;
-  }
-} */
 
 html h1 {
   @apply md:font-bold text-6xl text-white;
@@ -95,8 +104,7 @@ div {
 .ascii {
   display: flex;
   height: 100vh;
-
-  @apply snap-both snap-mandatory;
+  scroll-snap-align: start;
 }
 
 .canvas {
@@ -106,8 +114,7 @@ div {
   left: 0;
   bottom: 0;
   right: 0;
-
-  @apply snap-center;
+  scroll-snap-align: start;
 }
 
 .experiments:hover {

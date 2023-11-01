@@ -14,7 +14,7 @@ const { title, subtitle, colour, index } = Astro.props;
   transition:name=`heading-${index}`
 >
   <h1>{title}</h1>
-  <div class={colour + ` p-6 md:w-[40%] bg-night/30 backdrop-blur-sm`}>
+  <div class={colour + ` p-6 md:w-[40%] bg-night/30 backdrop-blur-sm dotted`}>
     <p class="text-justify">
       {subtitle}
     </p>

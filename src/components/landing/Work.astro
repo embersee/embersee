@@ -7,7 +7,8 @@ import Spacer from "../utils/Spacer.astro";
 const allProjects = await Astro.glob("../../pages/project/*.md");
 ---
 
-<section id="work" class="mx-auto transition-all scroll-mt-20">
+<section id="work" class="transition-all snap">
+  <Spacer />
   <Heading
     title="Selected Works"
     subtitle="I love storytelling through exploring unique design interfaces."
@@ -15,7 +16,7 @@ const allProjects = await Astro.glob("../../pages/project/*.md");
     index="work"
   />
 
-  <Spacer />
+  <Spacer padding={"my-8"} />
 
   <div class="md:flex gap-6 space-y-10 md:space-y-0">
     <div class="flex-1 flex flex-col justify-end text-frost">

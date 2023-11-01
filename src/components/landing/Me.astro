@@ -1,0 +1,21 @@
+---
+import Spacer from "../utils/Spacer.astro";
+import Heading from "../ui/Heading.astro";
+import Profile from "../ui/Profile.astro";
+---
+
+<section id="about" class="snap">
+  <Spacer />
+  <Heading
+    title="Me"
+    subtitle="Weaving tales of data and functionality with every line of code."
+    colour="text-frost"
+    index="about"
+  />
+
+  <Spacer padding={"my-8"} />
+
+  <div class="md:flex gap-6 space-y-6 md:space-y-0">
+    <Profile />
+  </div>
+</section>

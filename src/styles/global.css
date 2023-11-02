@@ -116,7 +116,3 @@ div {
   right: 0;
   scroll-snap-align: start;
 }
-
-.experiments:hover {
-  @apply text-matcha;
-}

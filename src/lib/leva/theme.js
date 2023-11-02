@@ -4,11 +4,11 @@ const theme = {
     elevation2: "#090909", // bg color of the rows (main panel color)
     elevation3: "#242424", // bg color of the inputs
     accent1: "#b9ff70",
-    accent2: "#9dffff",
-    accent3: "#9dffff",
+    accent2: "#d0428e",
+    accent3: "#d0428e",
     highlight1: "$accent1",
     highlight2: "$accent1",
-    highlight3: "#fefefe",
+    highlight3: "#000",
     vivid1: "#ffcc00",
     folderWidgetColor: "$highlight3",
     folderTextColor: "$highlight3",
@@ -28,7 +28,7 @@ const theme = {
     colGap: "16px",
   },
   fonts: {
-    mono: `'NON Natural Mono', ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
+    mono: `Geist Mono, ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
     sans: `system-ui, sans-serif`,
   },
   fontSizes: {
@@ -38,7 +38,7 @@ const theme = {
   sizes: {
     rootWidth: "328px",
     controlWidth: "178px",
-    numberInputMinWidth: "32px",
+    numberInputMinWidth: "40px",
     scrubberWidth: "12px",
     scrubberHeight: "20px",
     rowHeight: "20px",

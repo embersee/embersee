@@ -48,8 +48,6 @@ class ASCIIEffectImpl extends Effect {
 
 // Effect component
 export const ASCIIEffect = forwardRef((props = {}, ref) => {
-  const { viewport } = useThree();
-
   const effect = useMemo(() => new ASCIIEffectImpl(props), []);
 
   useEffect(() => {

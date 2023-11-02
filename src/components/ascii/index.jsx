@@ -3,6 +3,7 @@ import {
   useContextBridge,
   ScrollControls,
   useScroll,
+  Scroll,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
@@ -24,11 +25,16 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import tunnel from "tunnel-rat";
 import { AsciiContext } from "./context";
 import { GUI } from "@/components/utils/gui";
+import {
+  BackToTop,
+  Play,
+  EnableExperimentation,
+} from "../utils/scroll-buttons";
 
 const ui = tunnel();
 
 function Scene() {
-  const ref = useRef();
+  const group = useRef();
 
   const { gui } = useGui();
 
@@ -112,34 +118,33 @@ function Scene() {
 
   useFrame((state, delta) => {
     const r1 = scroll.range(0 / 5, 1 / 5);
-    const r2 = scroll.range(1 / 5, 4 / 5);
-    const r3 = scroll.range(2 / 5, 3 / 5);
-    const r4 = scroll.range(4 / 5, 1 / 5);
-    const r5 = scroll.range(9 / 10, 1 / 10);
+    const r2 = scroll.range(1 / 5, 1 / 5);
+    const r3 = scroll.range(2 / 5, 2 / 5);
+    const r4 = scroll.range(4 / 5, 1 / 5); // matrix state
+    const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
 
     // Break down each rotation component
     const initialRotation = Math.PI;
     const r1Rotation = (Math.PI / 2) * rsqw(r1);
-    const r2Rotation = r2 * Math.PI;
-    const constantRotation = Math.PI / 2;
-    const r3Rotation = r3 * Math.PI * rsqw(r3);
+    const r2Rotation = r2 * (Math.PI - Math.PI / 2);
+    const r3Rotation = r3 * (Math.PI * rsqw(r3));
 
     // Combine all components for the final rotation value
     model.current.rotation.y =
-      initialRotation - r1Rotation - r2Rotation - constantRotation - r3Rotation;
+      initialRotation - r1Rotation - r2Rotation - r3Rotation;
 
     let targetScale = 1 + 0.54 * (1 - rsqw(r1) + r3 * 2); // Adjust this as per your zoom out requirement
 
     const dampenedScale = MathUtils.damp(
-      ref.current.scale.z,
+      group.current.scale.z,
       targetScale,
       4,
       delta,
     );
 
-    ref.current.scale.x = dampenedScale;
-    ref.current.scale.y = dampenedScale;
-    ref.current.scale.z = dampenedScale;
+    group.current.scale.x = dampenedScale;
+    group.current.scale.y = dampenedScale;
+    group.current.scale.z = dampenedScale;
 
     set({
       time: r4,
@@ -149,7 +154,7 @@ function Scene() {
 
   return (
     <>
-      <group ref={ref}>
+      <group ref={group}>
         <OrbitControls enabled={gui} enableZoom={false} />
 
         <group ref={model} scale={200} position={-100}>
@@ -206,7 +211,7 @@ function Postprocessing() {
 
 function Inner() {
   const ContextBridge = useContextBridge(AsciiContext);
-
+  const pages = 5;
   return (
     <>
       <div className="ascii">
@@ -226,11 +231,53 @@ function Inner() {
               powerPreference: "high-performance",
             }}
           >
-            <ScrollControls pages={8}>
+            <ScrollControls pages={pages} maxSpeed={0.3} damping={0.3}>
               <ContextBridge>
                 <Scene />
                 <Postprocessing />
               </ContextBridge>
+              <Scroll
+                className="scroll-text-container"
+                html
+                style={{ width: "100%" }}
+              >
+                <Play pages={pages} />
+                <h1
+                  style={{
+                    position: "absolute",
+                    top: `100vh`,
+                    right: "20vw",
+                    fontSize: "12em",
+                    transform: `translate3d(0,-100%,0)`,
+                  }}
+                >
+                  embersee
+                </h1>
+                <h1
+                  style={{ position: "absolute", top: "180vh", left: "10vw" }}
+                >
+                  hail
+                </h1>
+                <h1
+                  style={{ position: "absolute", top: "260vh", right: "10vw" }}
+                >
+                  thee,
+                </h1>
+                <h1
+                  style={{ position: "absolute", top: "350vh", left: "10vw" }}
+                >
+                  bonk!
+                </h1>
+                <h1
+                  style={{ position: "absolute", top: "450vh", right: "10vw" }}
+                >
+                  her
+                  <br />
+                  mes.
+                </h1>
+                <BackToTop />
+                <EnableExperimentation />
+              </Scroll>
             </ScrollControls>
           </Canvas>
         </div>

@@ -7,7 +7,7 @@ export function Play({ pages }: { pages: number }) {
   return (
     <div className="mt-10 flex gap-4 justify-center items-center text-2xl  ">
       <p>Scroll</p>
-      <p>or</p>
+      {/* <p>or</p>
       <button
         onClick={() =>
           scroll.el.scrollTo({
@@ -17,7 +17,7 @@ export function Play({ pages }: { pages: number }) {
         }
       >
         Play
-      </button>
+      </button> */}
     </div>
   );
 }

@@ -98,7 +98,7 @@ function Scene() {
     return group;
   }, [asset]);
 
-  const { viewport, camera, scene } = useThree();
+  const { camera } = useThree();
 
   const defCamera = {
     x: 1500,
@@ -118,20 +118,18 @@ function Scene() {
 
   useFrame((state, delta) => {
     const r1 = scroll.range(0 / 5, 1 / 5);
-    const r2 = scroll.range(1 / 5, 1 / 5);
-    const r3 = scroll.range(2 / 5, 2 / 5);
+    const r2 = scroll.range(1 / 5, 1 / 5, 0.05);
+    const r3 = scroll.range(2 / 5, 2 / 5, 0.05);
     const r4 = scroll.range(4 / 5, 1 / 5); // matrix state
     const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
 
     // Break down each rotation component
-    const initialRotation = Math.PI;
-    const r1Rotation = (Math.PI / 2) * rsqw(r1);
-    const r2Rotation = r2 * (Math.PI - Math.PI / 2);
+    const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r1);
+    const r2Rotation = r2 * (Math.PI - Math.PI / 2) * rsqw(r2);
     const r3Rotation = r3 * (Math.PI * rsqw(r3));
 
     // Combine all components for the final rotation value
-    model.current.rotation.y =
-      initialRotation - r1Rotation - r2Rotation - r3Rotation;
+    model.current.rotation.y = r1Rotation - r2Rotation - r3Rotation;
 
     let targetScale = 1 + 0.54 * (1 - rsqw(r1) + r3 * 2); // Adjust this as per your zoom out requirement
 
@@ -188,7 +186,6 @@ function Postprocessing() {
     time,
     background,
   } = useContext(AsciiContext);
-  console.log("background", background);
 
   return (
     <EffectComposer>
@@ -231,7 +228,7 @@ function Inner() {
               powerPreference: "high-performance",
             }}
           >
-            <ScrollControls pages={pages} maxSpeed={0.3} damping={0.3}>
+            <ScrollControls pages={pages}>
               <ContextBridge>
                 <Scene />
                 <Postprocessing />
@@ -269,7 +266,11 @@ function Inner() {
                   bonk!
                 </h1>
                 <h1
-                  style={{ position: "absolute", top: "450vh", right: "10vw" }}
+                  style={{
+                    position: "absolute",
+                    top: "450vh",
+                    right: "10vw",
+                  }}
                 >
                   her
                   <br />

@@ -126,7 +126,7 @@ function Scene() {
     // Break down each rotation component
     const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r1);
     const r2Rotation = r2 * (Math.PI - Math.PI / 2) * rsqw(r2);
-    const r3Rotation = r3 * (Math.PI * rsqw(r3));
+    const r3Rotation = r3 * (Math.PI * rsqw(r3)) + r4;
 
     // Combine all components for the final rotation value
     model.current.rotation.y = r1Rotation - r2Rotation - r3Rotation;
@@ -290,7 +290,7 @@ function Inner() {
 }
 
 const DEFAULT = {
-  characters: " . */^e.m.b.r",
+  characters: " . */^e#",
   granularity: 6,
   charactersLimit: 12,
   fontSize: 86,

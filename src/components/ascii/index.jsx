@@ -34,25 +34,8 @@ function Scene() {
 
   const src = "/Porsche_Carrera_GT_2003.glb";
 
-  const loadingManager = new LoadingManager();
-
-  loadingManager.onStart = (url) => {
-    console.log("started: ", url);
-  };
-
-  loadingManager.onProgress = (url, loaded, total) => {
-    const progressBar = document.getElementById("progress-bar");
-
-    progressBar.value = (loaded / total) * 100;
-  };
-
-  loadingManager.onLoad = () => {
-    const progressContainer = document.getElementById("progress-container");
-    progressContainer.style.display = "none";
-  };
-
   const gltfLoader = useMemo(() => {
-    const loader = new GLTFLoader(loadingManager);
+    const loader = new GLTFLoader();
 
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
@@ -131,7 +114,7 @@ function Scene() {
   return (
     <>
       <group ref={group}>
-        <OrbitControls enabled={gui} enableZoom={false} />
+        <OrbitControls enable={gui} enableRotate={gui} enableZoom={false} />
 
         <group ref={model} scale={200} position={-100}>
           <primitive object={gltf} />
@@ -205,8 +188,9 @@ function Inner() {
               stencil: false,
               powerPreference: "high-performance",
             }}
+            className="canvas-el"
           >
-            <ScrollControls pages={pages}>
+            <ScrollControls pages={pages} className="scroll-controlls">
               <ContextBridge>
                 <Scene />
                 <Postprocessing />
@@ -254,7 +238,7 @@ function Inner() {
                   From concept to code,
                   <br /> brilliance begins.
                 </h1>
-                <div className="absolute top-[470vh] right-[10vw] flex flex-col space-y-4">
+                <div className="absolute right-[10vw] top-[480vh] flex flex-col space-y-4">
                   <div className="flex gap-4">
                     <BackToTop />
 
@@ -263,7 +247,7 @@ function Inner() {
 
                   <EnableExperimentation />
                 </div>
-                <div className="absolute top-[490vh] w-full flex items-center justify-center">
+                <div className="absolute top-[490vh] flex w-full items-center justify-center">
                   <SeeMore />
                 </div>
               </Scroll>

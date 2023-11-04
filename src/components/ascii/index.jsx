@@ -13,13 +13,7 @@ import { useControls } from "leva";
 import { text } from "@/lib/leva/text";
 import { useGui } from "@/lib/store";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import {
-  AnimationMixer,
-  Group,
-  LoadingManager,
-  MeshNormalMaterial,
-  MathUtils,
-} from "three";
+import { Group, LoadingManager, MeshNormalMaterial, MathUtils } from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import tunnel from "tunnel-rat";
@@ -29,16 +23,16 @@ import {
   BackToTop,
   Play,
   EnableExperimentation,
+  ContactNow,
+  SeeMore,
 } from "../utils/scroll-buttons";
 
 const ui = tunnel();
 
 function Scene() {
-  const group = useRef();
-
   const { gui } = useGui();
 
-  const [asset, setAsset] = useState("/Porsche_Carrera_GT_2003.glb");
+  const src = "/Porsche_Carrera_GT_2003.glb";
 
   const loadingManager = new LoadingManager();
 
@@ -61,34 +55,16 @@ function Scene() {
     const loader = new GLTFLoader(loadingManager);
 
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath(
-      "https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/libs/draco/",
-    );
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
     loader.setDRACOLoader(dracoLoader);
 
     return loader;
   }, []);
 
-  const [mixer, setMixer] = useState();
-
-  useFrame((_, t) => {
-    mixer?.update(t);
-  });
-
   const gltf = useMemo(() => {
-    let src = asset;
-
     const group = new Group();
 
-    gltfLoader.load(src, ({ scene, animations }) => {
-      const mixer = new AnimationMixer(scene);
-      setMixer(mixer);
-      const clips = animations;
-
-      clips.forEach((clip) => {
-        mixer.clipAction(clip).play();
-      });
-
+    gltfLoader.load(src, ({ scene }) => {
       group.add(scene);
       scene.traverse((mesh) => {
         mesh.material = new MeshNormalMaterial();
@@ -96,7 +72,7 @@ function Scene() {
     });
 
     return group;
-  }, [asset]);
+  }, [src]);
 
   const { camera } = useThree();
 
@@ -108,19 +84,19 @@ function Scene() {
 
   camera.position.set(defCamera.x, defCamera.y, defCamera.z);
 
-  camera.updateProjectionMatrix();
-
   const { set } = useContext(AsciiContext);
 
+  const group = useRef();
   const model = useRef();
 
   const scroll = useScroll();
 
   useFrame((state, delta) => {
-    const r1 = scroll.range(0 / 5, 1 / 5);
-    const r2 = scroll.range(1 / 5, 1 / 5, 0.05);
-    const r3 = scroll.range(2 / 5, 2 / 5, 0.05);
-    const r4 = scroll.range(4 / 5, 1 / 5); // matrix state
+    const r0 = scroll.range(0 / 5, 0.8 / 5);
+    const r1 = scroll.range(0.8 / 5, 1.5 / 5, 0.05);
+    const r2 = scroll.range(2 / 5, 1 / 5, 0.05);
+    const r3 = scroll.range(3 / 5, 1 / 5);
+    const r4 = scroll.range(4 / 5, 1 / 5, 0.01); // matrix state
     const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
 
     // Break down each rotation component
@@ -131,7 +107,7 @@ function Scene() {
     // Combine all components for the final rotation value
     model.current.rotation.y = r1Rotation - r2Rotation - r3Rotation;
 
-    let targetScale = 1 + 0.54 * (1 - rsqw(r1) + r3 * 2); // Adjust this as per your zoom out requirement
+    let targetScale = 1 + 0.54 * (1 - rsqw(r2) + r3 * 2); // Adjust this as per your zoom out requirement
 
     const dampenedScale = MathUtils.damp(
       group.current.scale.z,
@@ -145,8 +121,10 @@ function Scene() {
     group.current.scale.z = dampenedScale;
 
     set({
-      time: r4,
-      charactersLimit: DEFAULT.charactersLimit - r5 * 11,
+      time: r4 + (1 - r0),
+      charactersLimit:
+        r0 * DEFAULT.charactersLimit - //fade in
+        r5 * DEFAULT.charactersLimit, //fade out
     });
   });
 
@@ -253,17 +231,18 @@ function Inner() {
                 <h1
                   style={{ position: "absolute", top: "180vh", left: "10vw" }}
                 >
-                  hail
+                  From abstract ideas
                 </h1>
                 <h1
                   style={{ position: "absolute", top: "260vh", right: "10vw" }}
                 >
-                  thee,
+                  to digital masterpieces.
                 </h1>
                 <h1
                   style={{ position: "absolute", top: "350vh", left: "10vw" }}
                 >
-                  bonk!
+                  Stitching the seams of software with threads of thought and
+                  precision.
                 </h1>
                 <h1
                   style={{
@@ -272,12 +251,21 @@ function Inner() {
                     right: "10vw",
                   }}
                 >
-                  her
-                  <br />
-                  mes.
+                  From concept to code,
+                  <br /> brilliance begins.
                 </h1>
-                <BackToTop />
-                <EnableExperimentation />
+                <div className="absolute top-[470vh] right-[10vw] flex flex-col space-y-4">
+                  <div className="flex gap-4">
+                    <BackToTop />
+
+                    <ContactNow />
+                  </div>
+
+                  <EnableExperimentation />
+                </div>
+                <div className="absolute top-[490vh] w-full flex items-center justify-center">
+                  <SeeMore />
+                </div>
               </Scroll>
             </ScrollControls>
           </Canvas>
@@ -291,7 +279,7 @@ function Inner() {
 
 const DEFAULT = {
   characters: " . */^e#",
-  granularity: 6,
+  granularity: 7,
   charactersLimit: 12,
   fontSize: 86,
   fillPixels: false,

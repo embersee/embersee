@@ -10,6 +10,7 @@ body {
   height: 100vh;
   overflow: hidden;
   overscroll-behavior: none;
+  scrollbar-width: none;
 }
 
 main {
@@ -45,7 +46,7 @@ section {
 }
 
 html h1 {
-  @apply md:font-bold text-6xl text-white;
+  @apply text-5xl text-white;
 }
 
 html h2 {

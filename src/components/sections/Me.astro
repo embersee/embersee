@@ -2,14 +2,15 @@
 import Spacer from "../utils/Spacer.astro";
 import Heading from "../ui/Heading.astro";
 import Profile from "../ui/Profile.astro";
-import Footer from "../global/Footer.astro"
+import Footer from "../global/Footer.astro";
+import MyStack from "../ui/MyStack.astro";
 ---
 
 <section id="about" class="snap">
   <Spacer />
   <Heading
-    title="Me"
-    subtitle="Weaving tales of data and functionality with every line of code."
+    title="Who is ..."
+    subtitle="From abstract ideas to digital masterpieces — coding is my <canvas/>"
     colour="text-frost"
     index="about"
   />
@@ -19,7 +20,5 @@ import Footer from "../global/Footer.astro"
   <div class="md:flex gap-6 space-y-6 md:space-y-0">
     <Profile />
   </div>
-  <div class="mt-10"><Footer/></div>
-
-  
+  <div class="mt-10"><Footer /></div>
 </section>

@@ -83,7 +83,7 @@ function Scene() {
     const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
 
     // Break down each rotation component
-    const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r1);
+    const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r0 + r1);
     const r2Rotation = r2 * (Math.PI - Math.PI / 2) * rsqw(r2);
     const r3Rotation = r3 * (Math.PI * rsqw(r3)) + r4;
 
@@ -104,10 +104,11 @@ function Scene() {
     group.current.scale.z = dampenedScale;
 
     set({
-      time: r4 + (1 - r0),
+      time: r4,
+      // + (1 - r0),
       charactersLimit:
-        r0 * DEFAULT.charactersLimit - //fade in
-        r5 * DEFAULT.charactersLimit, //fade out
+        // r0 * DEFAULT.charactersLimit - //fade in
+        DEFAULT.charactersLimit - r5 * DEFAULT.charactersLimit, //fade out
     });
   });
 
@@ -270,7 +271,7 @@ const DEFAULT = {
   setColor: false,
   color: "#ffffff",
   background: "#000000",
-  greyscale: false,
+  greyscale: true,
   invert: true,
   matrix: true,
   setTime: true,

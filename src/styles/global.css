@@ -11,6 +11,7 @@ body {
   overflow: hidden;
   overscroll-behavior: none;
   scrollbar-width: none;
+  color: whitesmoke;
 }
 
 main {
@@ -46,15 +47,15 @@ section {
 }
 
 html h1 {
-  @apply text-5xl;
+  @apply text-7xl;
 }
 
 html h2 {
-  @apply text-3xl font-bold;
+  @apply text-7xl;
 }
 
 html h3 {
-  @apply text-2xl font-semibold;
+  @apply text-2xl;
 }
 
 html p {
@@ -121,4 +122,24 @@ div {
 canvas,
 div {
   touch-action: auto !important;
+}
+
+.project-card {
+  @apply w-full cursor-pointer select-none rounded-2xl bg-night/70 backdrop-blur-sm transition-all hover:-translate-y-2 hover:translate-x-2;
+}
+
+.project-card:hover {
+  @apply outline outline-2;
+}
+
+.project-card:active {
+  @apply -translate-y-1 translate-x-1;
+}
+
+.project-card h2 {
+  @apply text-3xl;
+}
+
+.button {
+  @apply w-min cursor-pointer select-none whitespace-nowrap border-current bg-night/30 underline-offset-4 outline-2 backdrop-blur-sm transition-all hover:-translate-y-2 hover:translate-x-2 hover:underline hover:outline active:-translate-y-1 active:translate-x-1;
 }

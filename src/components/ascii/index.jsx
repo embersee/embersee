@@ -26,6 +26,8 @@ import {
   ContactNow,
   SeeMore,
 } from "../utils/scroll-buttons";
+import { Page } from "../ui/Page";
+import Button from "../ui/Button";
 
 const ui = tunnel();
 
@@ -83,7 +85,7 @@ function Scene() {
     const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
 
     // Break down each rotation component
-    const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r0 + r1);
+    const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r1);
     const r2Rotation = r2 * (Math.PI - Math.PI / 2) * rsqw(r2);
     const r3Rotation = r3 * (Math.PI * rsqw(r3)) + r4;
 
@@ -103,12 +105,13 @@ function Scene() {
     group.current.scale.y = dampenedScale;
     group.current.scale.z = dampenedScale;
 
+    model.current.position.x = -100 + r2 * 600 - r3 * 600;
+
     set({
-      time: r4,
-      // + (1 - r0),
+      time: r4 + (1 - r0),
       charactersLimit:
-        // r0 * DEFAULT.charactersLimit - //fade in
-        DEFAULT.charactersLimit - r5 * DEFAULT.charactersLimit, //fade out
+        r0 * DEFAULT.charactersLimit - //fade in
+        r5 * DEFAULT.charactersLimit, //fade out
     });
   });
 
@@ -170,7 +173,7 @@ function Postprocessing() {
 
 function Inner() {
   const ContextBridge = useContextBridge(AsciiContext);
-  const pages = 5;
+  const pages = 8;
   return (
     <>
       <div className="ascii">
@@ -187,7 +190,7 @@ function Inner() {
               alpha: true,
               depth: false,
               stencil: false,
-              powerPreference: "high-performance",
+              powerPreference: "low-power",
             }}
             className="canvas-el"
           >
@@ -196,61 +199,103 @@ function Inner() {
                 <Scene />
                 <Postprocessing />
               </ContextBridge>
-              <Scroll
-                className="scroll-text-container"
-                html
-                style={{ width: "100%" }}
-              >
-                <Play pages={pages} />
-                <h1
-                  style={{
-                    position: "absolute",
-                    top: `100vh`,
-                    right: "20vw",
-                    fontSize: "12em",
-                    transform: `translate3d(0,-100%,0)`,
-                  }}
-                >
-                  embersee
-                </h1>
-                <h1
-                  style={{ position: "absolute", top: "180vh", left: "10vw" }}
-                >
-                  From abstract ideas
-                </h1>
-                <h1
-                  style={{ position: "absolute", top: "260vh", right: "10vw" }}
-                >
-                  to digital masterpieces.
-                </h1>
-                <h1
-                  style={{ position: "absolute", top: "350vh", left: "10vw" }}
-                >
-                  Stitching the seams of software with threads of thought and
-                  precision.
-                </h1>
-                <h1
-                  style={{
-                    position: "absolute",
-                    top: "450vh",
-                    right: "10vw",
-                  }}
-                >
-                  From concept to code,
-                  <br /> brilliance begins.
-                </h1>
-                <div className="absolute right-[10vw] top-[480vh] flex flex-col space-y-4">
-                  <div className="flex gap-4">
-                    <BackToTop />
-
-                    <ContactNow />
+              <Scroll className="w-full" html>
+                <Page className="flex flex-col">
+                  <div className="flex items-center justify-center gap-4">
+                    <p className=" text-whisper ">Scroll to preview</p>
                   </div>
+                  <div className="mb-32 ml-10 mt-auto">
+                    <p className="text-2xl">hey, my name is </p>
 
-                  <EnableExperimentation />
-                </div>
-                <div className="absolute top-[490vh] flex w-full items-center justify-center">
-                  <SeeMore />
-                </div>
+                    <h1
+                      style={{
+                        fontSize: "12em",
+                      }}
+                    >
+                      Philipp
+                    </h1>
+                    <p className="text-2xl">
+                      Hacking Cutting-Edge Web Experiences
+                    </p>
+                    <p>
+                      Explore my world of dynamic websites, seamless automation,
+                      and immersive 3D graphics.
+                    </p>
+                    <p className="flex items-center text-2xl">
+                      Ready for innovation?
+                      <div className="flex items-center pl-2">
+                        <Button href="#work">View My Work</Button> /
+                        <Button href="/contact">Let's Talk</Button>
+                      </div>
+                    </p>
+                  </div>
+                </Page>
+                <Page></Page>
+                <Page></Page>
+                <Page></Page>
+                <Page
+                  number={1}
+                  className="ml-4 w-1/2 rounded-3xl "
+                  title="Selected Works"
+                >
+                  {/* <h2 className="py-10">Selected Works</h2> */}
+                  <ul className="space-y-4">
+                    <li className="project-card shadow-box group p-2">
+                      <a href="{href}">
+                        <div className="grow">
+                          <div className="flex">
+                            <h2>title</h2>
+                            <div className="flex w-full justify-end gap-2"></div>
+                          </div>
+                          <p className="py-2 text-whisper">desc</p>
+                        </div>
+                      </a>
+                    </li>
+                    <li className="project-card shadow-box group p-2">
+                      <a href="{href}">
+                        <div className="grow">
+                          <div className="flex">
+                            <h2>title</h2>
+                            <div className="flex w-full justify-end gap-2"></div>
+                          </div>
+                          <p className="py-2 text-whisper">desc</p>
+                        </div>
+                      </a>
+                    </li>
+                    <li className="project-card shadow-box group p-2">
+                      <a href="{href}">
+                        <div className="grow">
+                          <div className="flex">
+                            <h2>title</h2>
+                            <div className="flex w-full justify-end gap-2"></div>
+                          </div>
+                          <p className="py-2 text-whisper">desc</p>
+                        </div>
+                      </a>
+                    </li>
+                    <li className="project-card shadow-box group p-2">
+                      <a href="{href}">
+                        <div className="grow">
+                          <div className="flex">
+                            <h2>title</h2>
+                            <div className="flex w-full justify-end gap-2"></div>
+                          </div>
+                          <p className="py-2 text-whisper">desc</p>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+
+                  <Button href="https://github.com/embersee" blank>
+                    Github
+                  </Button>
+                  <Button href="https://x.com">X</Button>
+                  <Button href="mailto:embersee@proton.me">Email</Button>
+                </Page>
+                <Page></Page>
+                <Page number={2}></Page>
+
+                <Page title={"Contact me"}></Page>
               </Scroll>
             </ScrollControls>
           </Canvas>
@@ -263,7 +308,7 @@ function Inner() {
 }
 
 const DEFAULT = {
-  characters: " . */^e#",
+  characters: " . */^$#",
   granularity: 7,
   charactersLimit: 12,
   fontSize: 86,
@@ -271,7 +316,7 @@ const DEFAULT = {
   setColor: false,
   color: "#ffffff",
   background: "#000000",
-  greyscale: true,
+  greyscale: false,
   invert: true,
   matrix: true,
   setTime: true,

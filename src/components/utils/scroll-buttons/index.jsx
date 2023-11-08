@@ -5,19 +5,8 @@ export function Play({ pages }) {
   // const scroll = useScroll();
 
   return (
-    <div className="mt-10 flex items-center justify-center gap-4 text-2xl">
+    <div className="flex items-center justify-center gap-4 text-2xl">
       <p className=" text-whisper ">Scroll to start.</p>
-      {/* <p>or</p>
-      <button
-        onClick={() =>
-          scroll.el.scrollTo({
-            top: window.innerHeight * pages,
-            behavior: "smooth",
-          })
-        }
-      >
-        Play
-      </button> */}
     </div>
   );
 }

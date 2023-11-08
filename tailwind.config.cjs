@@ -7,7 +7,6 @@ module.exports = {
     extend: {
       colors: {
         night: "#090909",
-        white: "#e7e7d8",
         eagle: "#afac95",
         carrot: "#ff5800",
         babycarrot: "#ff7e3b",

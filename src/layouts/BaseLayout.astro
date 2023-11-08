@@ -11,9 +11,8 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={title} />
-    <!-- <ViewTransitions fallback="swap" /> -->
   </head>
-  <body class="mx-auto bg-black">
+  <body class="mx-auto bg-background text-foreground">
     <main class="mx-auto snap-container">
       <slot />
     </main>

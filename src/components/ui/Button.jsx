@@ -1,8 +1,11 @@
-export default function Button({ href, blank, children }) {
+export default function Button({ href, blank, children, ...props }) {
   return (
-    <div className="button shadow-box">
-      <a href={href} target={blank && "_blank"}>
-        <div className="flex gap-1 p-2 text-white">[{children}]</div>
+    <div {...props} className="button">
+      <a href={href} target={blank && "_blank"} className="flex items-center">
+        <span className="text-emerald text-4xl font-extralight">[</span>
+
+        {children}
+        <span className="text-emerald text-4xl font-extralight">]</span>
       </a>
     </div>
   );

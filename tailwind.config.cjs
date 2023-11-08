@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
@@ -18,6 +20,15 @@ module.exports = {
         tokyo: "#7381ff",
         brick: "#FF4D4D",
         frost: "#9dffff",
+        emerald: "hsl(var(--accent))",
+        background: "hsl(var(--background, <alpha-values>))",
+        foreground: "hsl(var(--foreground))",
+        primary: colors.neutral,
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
     },
     fontFamily: {

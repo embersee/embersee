@@ -6,37 +6,26 @@
   box-sizing: border-box;
 }
 
-body {
-  height: 100vh;
-  overflow: hidden;
-  overscroll-behavior: none;
-  scrollbar-width: none;
-  color: whitesmoke;
-}
-
-main {
-  @apply selection:bg-babycarrot;
-}
-
-.snap-container {
-  scroll-behavior: smooth;
-  overflow: scroll;
-  height: 100vh;
-  scroll-snap-points-y: repeat(100vh);
-  scroll-snap-type: y mandatory;
-}
-
-section {
-  @apply mx-auto max-w-5xl;
-}
-
-.snap {
-  height: 100vh;
-  scroll-snap-align: start;
-  position: relative;
-}
-
 @layer base {
+  :root {
+    --background: 0, 0%, 100%;
+    --foreground: 0, 0%, 20%;
+    --accent: 36, 100%, 50%;
+
+    --accent2: 36, 100%, 50%;
+
+    --radius: 1.25rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 0, 0%, 0%;
+      --foreground: 219, 83%, 95%;
+      --accent: 124, 94%, 74%;
+      --accent2: 124, 94%, 74%;
+    }
+  }
+
   @font-face {
     font-display: block;
     font-family: "Geist Mono";
@@ -44,64 +33,26 @@ section {
     font-weight: 400;
     src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
   }
+
+  @font-face {
+    font-display: block;
+    font-family: "Geist Mono";
+    font-style: normal;
+    font-weight: 100;
+    src: url("/fonts/GeistMono-UltraLight.woff2") format("woff2");
+  }
 }
 
-html h1 {
-  @apply text-7xl;
+body {
+  height: 100vh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  scrollbar-width: none;
 }
 
-html h2 {
-  @apply text-7xl;
+main {
+  @apply selection:bg-babycarrot;
 }
-
-html h3 {
-  @apply text-2xl;
-}
-
-html p {
-  @apply font-light;
-}
-
-.dotted {
-  --dot-bg: black;
-  --dot-color: color-mix(in srgb, currentColor 50%, transparent);
-  --dot-size: 1px;
-  --dot-space: 10px;
-  background:
-    linear-gradient(
-        90deg,
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    linear-gradient(
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    var(--dot-color);
-}
-
-.shadow-box:hover {
-  -webkit-box-shadow: -8px 8px 0px 0px currentColor;
-  -moz-box-shadow: -8px 8px 0px 0px currentColor;
-  box-shadow: -8px 8px 0px 0px currentColor;
-}
-
-.shadow-box:active {
-  -webkit-box-shadow: -4px 4px 0px 0px currentColor;
-  -moz-box-shadow: -4px 4px 0px 0px currentColor;
-  box-shadow: -4px 4px 0px 0px currentColor;
-}
-
-.outline-container {
-  @apply outline outline-1 outline-offset-8 outline-[currentColor] transition-all;
-}
-
-/* 
-div {
-  @apply outline outline-1;
-} */
 
 .ascii {
   display: flex;
@@ -124,22 +75,30 @@ div {
   touch-action: auto !important;
 }
 
-.project-card {
-  @apply w-full cursor-pointer select-none rounded-2xl bg-night/70 backdrop-blur-sm transition-all hover:-translate-y-2 hover:translate-x-2;
-}
-
-.project-card:hover {
-  @apply outline outline-2;
-}
-
-.project-card:active {
-  @apply -translate-y-1 translate-x-1;
-}
-
-.project-card h2 {
-  @apply text-3xl;
-}
-
 .button {
-  @apply w-min cursor-pointer select-none whitespace-nowrap border-current bg-night/30 underline-offset-4 outline-2 backdrop-blur-sm transition-all hover:-translate-y-2 hover:translate-x-2 hover:underline hover:outline active:-translate-y-1 active:translate-x-1;
+  @apply w-min cursor-pointer select-none whitespace-nowrap;
+}
+
+a {
+  background: linear-gradient(
+      to right,
+      hsl(var(--background)),
+      hsl(var(--background))
+    ),
+    linear-gradient(to right, hsl(var(--accent2)), hsl(var(--accent)));
+  background-size:
+    100% 0.1em,
+    0 0.1em;
+  background-position:
+    100% 100%,
+    0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 200ms;
+}
+
+a:hover,
+a:focus {
+  background-size:
+    0 0.1em,
+    100% 0.1em;
 }

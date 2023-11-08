@@ -1,4 +1,3 @@
-import { useThree } from "@react-three/fiber";
 import { BlendFunction, Effect } from "postprocessing";
 import { forwardRef, useEffect, useMemo } from "react";
 import { Color, Uniform } from "three";
@@ -41,7 +40,7 @@ class ASCIIEffectImpl extends Effect {
 
   update(render, target, deltaTime) {
     if (!this.overwriteTime) {
-      this.uniforms.get("uTime").value += deltaTime * 0.2;
+      this.uniforms.get("uTime").value += deltaTime * 0.1;
     }
   }
 }

@@ -19,15 +19,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import tunnel from "tunnel-rat";
 import { AsciiContext } from "./context";
 import { GUI } from "@/components/utils/gui";
-import {
-  BackToTop,
-  Play,
-  EnableExperimentation,
-  ContactNow,
-  SeeMore,
-} from "../utils/scroll-buttons";
-import { Page } from "../ui/Page";
-import Button from "../ui/Button";
+
+import { Page } from "../ui/page";
+import Landing from "../sections/landing";
+import ContactForm from "../sections/contact-form";
+import { BackToTop, EnableExperimentation } from "../utils/scroll-buttons";
 
 const ui = tunnel();
 
@@ -76,6 +72,15 @@ function Scene() {
 
   const scroll = useScroll();
 
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    // dark mode
+
+    set({ greyscale: false });
+  }
+
   useFrame((state, delta) => {
     const r0 = scroll.range(0 / 5, 0.8 / 5);
     const r1 = scroll.range(0.8 / 5, 1.5 / 5, 0.05);
@@ -104,8 +109,6 @@ function Scene() {
     group.current.scale.x = dampenedScale;
     group.current.scale.y = dampenedScale;
     group.current.scale.z = dampenedScale;
-
-    model.current.position.x = -100 + r2 * 600 - r3 * 600;
 
     set({
       time: r4 + (1 - r0),
@@ -173,7 +176,7 @@ function Postprocessing() {
 
 function Inner() {
   const ContextBridge = useContextBridge(AsciiContext);
-  const pages = 8;
+  const pages = 4;
   return (
     <>
       <div className="ascii">
@@ -194,108 +197,22 @@ function Inner() {
             }}
             className="canvas-el"
           >
-            <ScrollControls pages={pages} className="scroll-controlls">
+            <ScrollControls
+              pages={pages}
+              className="scroll-controlls"
+              maxSpeed={0.4}
+            >
               <ContextBridge>
                 <Scene />
                 <Postprocessing />
               </ContextBridge>
               <Scroll className="w-full" html>
-                <Page className="flex flex-col">
-                  <div className="flex items-center justify-center gap-4">
-                    <p className=" text-whisper ">Scroll to preview</p>
-                  </div>
-                  <div className="mb-32 ml-10 mt-auto">
-                    <p className="text-2xl">hey, my name is </p>
+                <Landing />
 
-                    <h1
-                      style={{
-                        fontSize: "12em",
-                      }}
-                    >
-                      Philipp
-                    </h1>
-                    <p className="text-2xl">
-                      Hacking Cutting-Edge Web Experiences
-                    </p>
-                    <p>
-                      Explore my world of dynamic websites, seamless automation,
-                      and immersive 3D graphics.
-                    </p>
-                    <p className="flex items-center text-2xl">
-                      Ready for innovation?
-                      <div className="flex items-center pl-2">
-                        <Button href="#work">View My Work</Button> /
-                        <Button href="/contact">Let's Talk</Button>
-                      </div>
-                    </p>
-                  </div>
-                </Page>
                 <Page></Page>
                 <Page></Page>
-                <Page></Page>
-                <Page
-                  number={1}
-                  className="ml-4 w-1/2 rounded-3xl "
-                  title="Selected Works"
-                >
-                  {/* <h2 className="py-10">Selected Works</h2> */}
-                  <ul className="space-y-4">
-                    <li className="project-card shadow-box group p-2">
-                      <a href="{href}">
-                        <div className="grow">
-                          <div className="flex">
-                            <h2>title</h2>
-                            <div className="flex w-full justify-end gap-2"></div>
-                          </div>
-                          <p className="py-2 text-whisper">desc</p>
-                        </div>
-                      </a>
-                    </li>
-                    <li className="project-card shadow-box group p-2">
-                      <a href="{href}">
-                        <div className="grow">
-                          <div className="flex">
-                            <h2>title</h2>
-                            <div className="flex w-full justify-end gap-2"></div>
-                          </div>
-                          <p className="py-2 text-whisper">desc</p>
-                        </div>
-                      </a>
-                    </li>
-                    <li className="project-card shadow-box group p-2">
-                      <a href="{href}">
-                        <div className="grow">
-                          <div className="flex">
-                            <h2>title</h2>
-                            <div className="flex w-full justify-end gap-2"></div>
-                          </div>
-                          <p className="py-2 text-whisper">desc</p>
-                        </div>
-                      </a>
-                    </li>
-                    <li className="project-card shadow-box group p-2">
-                      <a href="{href}">
-                        <div className="grow">
-                          <div className="flex">
-                            <h2>title</h2>
-                            <div className="flex w-full justify-end gap-2"></div>
-                          </div>
-                          <p className="py-2 text-whisper">desc</p>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
 
-                  <Button href="https://github.com/embersee" blank>
-                    Github
-                  </Button>
-                  <Button href="https://x.com">X</Button>
-                  <Button href="mailto:embersee@proton.me">Email</Button>
-                </Page>
-                <Page></Page>
-                <Page number={2}></Page>
-
-                <Page title={"Contact me"}></Page>
+                <ContactForm />
               </Scroll>
             </ScrollControls>
           </Canvas>
@@ -316,7 +233,7 @@ const DEFAULT = {
   setColor: false,
   color: "#ffffff",
   background: "#000000",
-  greyscale: false,
+  greyscale: true,
   invert: true,
   matrix: true,
   setTime: true,

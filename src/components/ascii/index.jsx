@@ -13,17 +13,16 @@ import { useControls } from "leva";
 import { text } from "@/lib/leva/text";
 import { useGui } from "@/lib/store";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { Group, LoadingManager, MeshNormalMaterial, MathUtils } from "three";
+import { Group, MeshNormalMaterial, MathUtils } from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import tunnel from "tunnel-rat";
 import { AsciiContext } from "./context";
 import { GUI } from "@/components/utils/gui";
 
-import { Page } from "../ui/page";
-import Landing from "../sections/landing";
-import ContactForm from "../sections/contact-form";
-import { BackToTop, EnableExperimentation } from "../utils/scroll-buttons";
+import { Page } from "@/components/ui/page";
+import Landing from "@/components/sections/landing";
+import ContactForm from "@/components/sections/contact-form";
 
 const ui = tunnel();
 
@@ -77,7 +76,6 @@ function Scene() {
     window.matchMedia("(prefers-color-scheme: dark)").matches
   ) {
     // dark mode
-
     set({ greyscale: false });
   }
 
@@ -209,8 +207,8 @@ function Inner() {
               <Scroll className="w-full" html>
                 <Landing />
 
-                <Page></Page>
-                <Page></Page>
+                <Page />
+                <Page />
 
                 <ContactForm />
               </Scroll>

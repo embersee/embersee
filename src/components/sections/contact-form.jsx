@@ -3,28 +3,27 @@ import Button from "@/components/ui/button";
 import { BackToTop, EnableExperimentation } from "../utils/scroll-buttons";
 
 import { useState } from "react";
-import classNames from "classnames";
 import Container from "../ui/container";
 
 export default function ContactForm() {
   const [responseMessage, setResponseMessage] = useState();
   const [loadingState, setLoading] = useState(false);
-  const [status, setStatus] = useState();
+
+  const url = import.meta.env.VITE_PUBLIC_URL;
 
   async function submit(e) {
     e.preventDefault();
     setLoading(true);
     const htmlFormData = new FormData(e.target);
-    const response = await fetch("/api/contact", {
+
+    await fetch(url, {
+      mode: "no-cors",
       method: "POST",
       body: htmlFormData,
     });
-    const data = await response.json();
-    if (data.message) {
-      setStatus(data.status);
-      setLoading(false);
-      setResponseMessage(data.message);
-    }
+
+    setLoading(false);
+    setResponseMessage("Message sent!");
   }
 
   return (
@@ -110,20 +109,13 @@ export default function ContactForm() {
 
               <div className="flex items-center space-x-4">
                 <button
-                  className="hover:bg-emerald hover:shadow-emerald text-emerald focus-visible:outline-emerald dark:text-emerald outline-emerald inline-flex cursor-pointer items-center justify-center rounded-lg border border-transparent bg-background px-5 py-3 text-lg shadow outline outline-2 transition placeholder:uppercase hover:text-background active:translate-y-1 disabled:active:translate-y-0 "
+                  className="hover:bg-emerald hover:shadow-emerald text-emerald focus-visible:outline-emerald dark:text-emerald outline-emerald bg-background hover:text-background inline-flex cursor-pointer items-center justify-center rounded-lg border border-transparent px-5 py-3 text-lg shadow outline outline-2 transition placeholder:uppercase active:translate-y-1 disabled:active:translate-y-0 "
                   type="submit"
-                  disabled={loadingState || status === 200}
+                  disabled={loadingState}
                 >
                   Submit
                 </button>
-                <p
-                  className={classNames(
-                    "text-xl",
-                    status === 200 ? "text-emerald" : "text-red-500",
-                  )}
-                >
-                  {responseMessage && responseMessage}
-                </p>
+                <p className="text-emerald text-xl">{responseMessage}</p>
               </div>
             </form>
           </div>

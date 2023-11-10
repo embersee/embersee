@@ -3,17 +3,17 @@ import { Edge } from "./edge";
 
 export default function EdgeWrapper({ children, className }) {
   return (
-    <div className="group relative z-50 flex flex-col items-center justify-center">
-      <div className=" group-hover:text-accent absolute top-0 flex w-full justify-between transition-colors delay-100 ">
-        <Edge />
-        <Edge className="rotate-90" />
+    <div className="group relative z-50 flex flex-col items-center justify-center ">
+      <div className="absolute top-0 flex w-full justify-between transition group-hover:translate-y-[2px] group-hover:text-accent ">
+        <Edge className="transition group-hover:translate-x-[2px] " />
+        <Edge className="rotate-90 transition group-hover:-translate-x-[2px] " />
       </div>
 
       <div className={cn("", className)}>{children}</div>
 
-      <div className="group-hover:text-accent absolute bottom-0 flex w-full justify-between  transition-colors delay-100">
-        <Edge className="-rotate-90" />
-        <Edge className="rotate-180" />
+      <div className="absolute bottom-0 flex w-full justify-between transition group-hover:-translate-y-[2px] group-hover:text-accent ">
+        <Edge className="-rotate-90 transition group-hover:translate-x-[2px]" />
+        <Edge className="rotate-180 transition group-hover:-translate-x-[2px]" />
       </div>
     </div>
   );

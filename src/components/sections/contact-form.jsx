@@ -3,7 +3,7 @@ import Button from "@/components/ui/button";
 import { BackToTop, EnableExperimentation } from "../utils/scroll-buttons";
 
 import { useState } from "react";
-import Container from "../ui/container";
+import CrossContainer from "@/components/ui/cross-container";
 
 export default function ContactForm() {
   const [responseMessage, setResponseMessage] = useState("");
@@ -39,8 +39,8 @@ export default function ContactForm() {
     <Page className="grid items-center">
       <section className="py-10 sm:py-20">
         <div className="mx-auto max-w-2xl px-2 sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-8">
-            <Container>
+          <CrossContainer className="p-1 sm:p-6">
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-8">
               <div className="flex flex-col gap-4 sm:gap-6">
                 <h2 className="text-3xl font-medium tracking-tighter sm:text-6xl">
                   Let's talk
@@ -67,8 +67,8 @@ export default function ContactForm() {
                 </div>
 
                 <div className="mt-auto hidden sm:block">
-                  <h3 className="text-xl sm:text-2xl">Find me here:</h3>
-                  <div className="flex items-center space-x-2 text-lg">
+                  <h3 className="mb-4 text-xl sm:text-2xl">Find me here:</h3>
+                  <div className="flex items-center space-x-4 text-lg">
                     <Button href="https://github.com/embersee" blank>
                       Github
                     </Button>
@@ -79,58 +79,59 @@ export default function ContactForm() {
                   </div>
                 </div>
               </div>
-            </Container>
-            <form onSubmit={submit} className="my-4 flex flex-col gap-y-6">
-              <div className="space-y-2">
-                <label htmlFor="name">Your Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  autoComplete="name"
-                  className="contact-input"
-                  placeholder="Type here"
-                />
-              </div>
 
-              <div className="space-y-2">
-                <label htmlFor="email">Your Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  autoComplete="email"
-                  className="contact-input"
-                  placeholder="Type here"
-                />
-              </div>
+              <form onSubmit={submit} className="my-4 flex flex-col gap-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="name">Your Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    autoComplete="name"
+                    className="input-field"
+                    placeholder="Type here"
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label htmlFor="message">Your Message</label>
-                <textarea
-                  name="message"
-                  id="message"
-                  rows={3}
-                  className="contact-input"
-                  placeholder="Type here"
-                ></textarea>
-              </div>
+                <div className="space-y-2">
+                  <label htmlFor="email">Your Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    autoComplete="email"
+                    className="input-field"
+                    placeholder="Type here"
+                  />
+                </div>
 
-              <div className="flex items-center space-x-4">
-                <button
-                  className="contact-submit-button"
-                  type="submit"
-                  disabled={loadingState || complete}
-                >
-                  Submit
-                </button>
-                <p className="text-xl text-emerald">{responseMessage}</p>
-              </div>
-            </form>
-          </div>
+                <div className="space-y-2">
+                  <label htmlFor="message">Your Message</label>
+                  <textarea
+                    name="message"
+                    id="message"
+                    rows={3}
+                    className="input-field"
+                    placeholder="Type here"
+                  ></textarea>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <button
+                    className="submit-button"
+                    type="submit"
+                    disabled={loadingState || complete}
+                  >
+                    Submit
+                  </button>
+                  <p className="text-accent text-xl">{responseMessage}</p>
+                </div>
+              </form>
+            </div>
+          </CrossContainer>
         </div>
       </section>
-      <div className="mt-10 flex w-full items-center justify-center space-x-4">
+      <div className="my-4 mt-auto flex w-full items-center justify-center space-x-4">
         <BackToTop />
         <EnableExperimentation />
       </div>

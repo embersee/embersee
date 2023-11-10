@@ -1,7 +1,7 @@
 import { Page } from "@/components/ui/page";
 import Button from "@/components/ui/button";
 import { useScroll } from "@react-three/drei";
-import Container from "../ui/container";
+import CrossContainer from "@/components/ui/cross-container";
 
 export default function Landing() {
   const scroll = useScroll();
@@ -11,13 +11,13 @@ export default function Landing() {
         <p>Scroll to preview</p>
       </div>
       <div className=" mx-auto mb-32 mt-auto">
-        <p className="text-2xl">Hey, my name is </p>
+        <p className="mb-2 text-2xl">Hey, my name is </p>
 
-        <Container>
+        <CrossContainer>
           <h1 className=" text-7xl leading-none tracking-tighter sm:text-[12em]">
             embersee
           </h1>
-        </Container>
+        </CrossContainer>
 
         {/* <Seperator /> */}
         <p className="mt-8 text-2xl">Hacking Cutting-Edge Web Experiences</p>

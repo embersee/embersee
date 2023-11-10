@@ -20,9 +20,10 @@ module.exports = {
         tokyo: "#7381ff",
         brick: "#FF4D4D",
         frost: "#9dffff",
-        emerald: "hsl(var(--accent))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        accent: "hsl(var(--accent))",
+        background: "hsl(var(--background), <alpha-value>)",
+        foreground: "hsl(var(--foreground), <alpha-value>)",
+        emerald: "hsl(var(--emerald))",
         primary: colors.neutral,
       },
       borderRadius: {
@@ -32,7 +33,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ["Geist Mono", ...defaultTheme.fontFamily.sans],
+      mono: ["Geist Mono", ...defaultTheme.fontFamily.mono],
     },
   },
   plugins: [

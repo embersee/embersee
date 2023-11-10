@@ -201,7 +201,7 @@ function Inner() {
           >
             <ScrollControls
               pages={pages}
-              className="scroll-controlls"
+              className="scroll-controls"
               maxSpeed={0.4}
             >
               <ContextBridge>

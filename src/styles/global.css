@@ -10,11 +10,14 @@
   :root {
     --background: 0, 0%, 100%;
     --foreground: 0, 0%, 20%;
-    --accent: 36, 100%, 50%;
+    --accent: 21, 84%, 62%;
+    --accent2: 21, 84%, 62%;
 
-    --accent2: 36, 100%, 50%;
+    --sugar-milk: 0, 67%, 98%;
+    --cotton-ball: 221, 76%, 95%;
+    --emerald: 124, 94%, 74%;
 
-    --radius: 1.25rem;
+    --radius: 1rem;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -33,31 +36,21 @@
     font-weight: 400;
     src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
   }
-
-  @font-face {
-    font-display: block;
-    font-family: "Geist Mono";
-    font-style: normal;
-    font-weight: 100;
-    src: url("/fonts/GeistMono-UltraLight.woff2") format("woff2");
-  }
 }
 
 body {
   height: 100vh;
   overflow: hidden;
   overscroll-behavior: none;
-  scrollbar-width: none;
 }
 
 main {
-  @apply selection:bg-babycarrot;
+  @apply font-mono selection:bg-babycarrot;
 }
 
 .ascii {
   display: flex;
   height: 100vh;
-  scroll-snap-align: start;
 }
 
 .canvas {
@@ -67,24 +60,28 @@ main {
   left: 0;
   bottom: 0;
   right: 0;
-  scroll-snap-align: start;
 }
 
+/* Makes mobile scrolling work. */
 canvas,
 div {
   touch-action: auto !important;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+canvas,
+div::-webkit-scrollbar {
+  display: none;
 }
 
 .button {
   @apply w-min cursor-pointer select-none whitespace-nowrap;
 }
 
-a {
-  background: linear-gradient(
-      to right,
-      hsl(var(--background)),
-      hsl(var(--background))
-    ),
+.button .link {
+  background: linear-gradient(to right, transparent, transparent),
     linear-gradient(to right, hsl(var(--accent2)), hsl(var(--accent)));
   background-size:
     100% 0.1em,
@@ -93,20 +90,20 @@ a {
     100% 100%,
     0 100%;
   background-repeat: no-repeat;
-  transition: background-size 250ms;
+  transition: background-size ease-in-out 250ms;
 }
 
-a:hover,
-a:focus {
+.button:hover .link,
+.button:focus .link {
   background-size:
     0 0.1em,
     100% 0.1em;
 }
 
-.contact-input {
-  @apply block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-2 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-emerald dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-600/40 dark:focus:ring-emerald;
+.input-field {
+  @apply focus:ring-accent dark:focus:ring-accent block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-1 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 autofill:duration-[5000000ms] hover:ring-primary-100 focus:outline-none focus:ring-2 dark:bg-primary-950/70  dark:ring-primary-600/60 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-600/30;
 }
 
-.contact-submit-button {
-  @apply inline-flex cursor-pointer items-center justify-center rounded-lg border-2 border-emerald bg-primary-50/70 px-5 py-3 text-lg text-emerald shadow outline outline-2 outline-transparent transition hover:bg-emerald hover:text-background hover:shadow-emerald focus-visible:outline-emerald active:translate-y-1 disabled:active:translate-y-0 dark:bg-primary-950/70 dark:text-emerald;
+.submit-button {
+  @apply border-accent text-accent hover:bg-accent hover:shadow-accent focus-visible:outline-accent dark:text-accent inline-flex cursor-pointer items-center justify-center rounded-lg border-2 bg-primary-50/70 px-5 py-3 text-lg shadow outline outline-2 outline-transparent transition hover:text-background active:translate-y-1 disabled:active:translate-y-0 dark:bg-primary-950/70;
 }

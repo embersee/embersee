@@ -6,15 +6,23 @@ import { useState } from "react";
 import Container from "../ui/container";
 
 export default function ContactForm() {
-  const [responseMessage, setResponseMessage] = useState();
+  const [responseMessage, setResponseMessage] = useState("");
   const [loadingState, setLoading] = useState(false);
+  const [complete, setComplete] = useState(false);
 
   const url = import.meta.env.VITE_PUBLIC_URL;
 
   async function submit(e) {
     e.preventDefault();
+    setResponseMessage("");
     setLoading(true);
     const htmlFormData = new FormData(e.target);
+
+    if (!isFormDataComplete(htmlFormData)) {
+      setResponseMessage("Fill out all the fields.");
+      setLoading(false);
+      return;
+    }
 
     await fetch(url, {
       mode: "no-cors",
@@ -23,6 +31,7 @@ export default function ContactForm() {
     });
 
     setLoading(false);
+    setComplete(true);
     setResponseMessage("Message sent!");
   }
 
@@ -79,7 +88,7 @@ export default function ContactForm() {
                   name="name"
                   id="name"
                   autoComplete="name"
-                  className="block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-2 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400"
+                  className="contact-input"
                   placeholder="Type here"
                 />
               </div>
@@ -91,7 +100,7 @@ export default function ContactForm() {
                   name="email"
                   id="email"
                   autoComplete="email"
-                  className="block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-2 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400"
+                  className="contact-input"
                   placeholder="Type here"
                 />
               </div>
@@ -102,16 +111,16 @@ export default function ContactForm() {
                   name="message"
                   id="message"
                   rows={3}
-                  className="block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-2 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400"
+                  className="contact-input"
                   placeholder="Type here"
                 ></textarea>
               </div>
 
               <div className="flex items-center space-x-4">
                 <button
-                  className="inline-flex cursor-pointer items-center justify-center rounded-lg border border-transparent bg-background px-5 py-3 text-lg text-emerald shadow outline outline-2 outline-emerald transition placeholder:uppercase hover:bg-emerald hover:text-background hover:shadow-emerald focus-visible:outline-emerald active:translate-y-1 disabled:active:translate-y-0 dark:text-emerald "
+                  className="contact-submit-button"
                   type="submit"
-                  disabled={loadingState}
+                  disabled={loadingState || complete}
                 >
                   Submit
                 </button>
@@ -127,4 +136,13 @@ export default function ContactForm() {
       </div>
     </Page>
   );
+}
+
+function isFormDataComplete(formData) {
+  for (let [key, value] of formData.entries()) {
+    if (!value || value.trim() === "") {
+      return false; // Found an empty field
+    }
+  }
+  return true; // All fields are filled
 }

@@ -21,7 +21,7 @@ module.exports = {
         brick: "#FF4D4D",
         frost: "#9dffff",
         emerald: "hsl(var(--accent))",
-        background: "hsl(var(--background, <alpha-values>))",
+        background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: colors.neutral,
       },

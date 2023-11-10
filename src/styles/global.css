@@ -93,7 +93,7 @@ a {
     100% 100%,
     0 100%;
   background-repeat: no-repeat;
-  transition: background-size 200ms;
+  transition: background-size 250ms;
 }
 
 a:hover,
@@ -101,4 +101,12 @@ a:focus {
   background-size:
     0 0.1em,
     100% 0.1em;
+}
+
+.contact-input {
+  @apply block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-2 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-emerald dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-600/40 dark:focus:ring-emerald;
+}
+
+.contact-submit-button {
+  @apply inline-flex cursor-pointer items-center justify-center rounded-lg border-2 border-emerald bg-primary-50/70 px-5 py-3 text-lg text-emerald shadow outline outline-2 outline-transparent transition hover:bg-emerald hover:text-background hover:shadow-emerald focus-visible:outline-emerald active:translate-y-1 disabled:active:translate-y-0 dark:bg-primary-950/70 dark:text-emerald;
 }

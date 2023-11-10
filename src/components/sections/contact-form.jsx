@@ -59,7 +59,7 @@ export default function ContactForm() {
 
                 <div className="mt-auto hidden sm:block">
                   <h3 className="text-xl sm:text-2xl">Find me here:</h3>
-                  <div className="flex items-center space-x-2 sm:text-xl">
+                  <div className="flex items-center space-x-2 text-lg">
                     <Button href="https://github.com/embersee" blank>
                       Github
                     </Button>
@@ -79,7 +79,7 @@ export default function ContactForm() {
                   name="name"
                   id="name"
                   autoComplete="name"
-                  className="bg-primary-50/70 ring-primary-400/40 placeholder:text-primary-950/60 hover:ring-primary-100 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400 block w-full appearance-none rounded-lg px-4 py-4 text-lg ring-2 transition placeholder:uppercase focus:outline-none focus:ring-2"
+                  className="block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-2 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400"
                   placeholder="Type here"
                 />
               </div>
@@ -91,7 +91,7 @@ export default function ContactForm() {
                   name="email"
                   id="email"
                   autoComplete="email"
-                  className="bg-primary-50/70 ring-primary-400/40 placeholder:text-primary-950/60 hover:ring-primary-100 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400 block w-full appearance-none rounded-lg px-4 py-4 text-lg ring-2 transition placeholder:uppercase focus:outline-none focus:ring-2"
+                  className="block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-2 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400"
                   placeholder="Type here"
                 />
               </div>
@@ -102,20 +102,20 @@ export default function ContactForm() {
                   name="message"
                   id="message"
                   rows={3}
-                  className="bg-primary-50/70 ring-primary-400/40 placeholder:text-primary-950/60 hover:ring-primary-100 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400 block w-full appearance-none rounded-lg px-4 py-4 text-lg ring-2 transition placeholder:uppercase focus:outline-none focus:ring-2"
+                  className="block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-2 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-100 dark:bg-primary-950/70 dark:ring-primary-200/40 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-400 dark:focus:ring-primary-400"
                   placeholder="Type here"
                 ></textarea>
               </div>
 
               <div className="flex items-center space-x-4">
                 <button
-                  className="hover:bg-emerald hover:shadow-emerald text-emerald focus-visible:outline-emerald dark:text-emerald outline-emerald bg-background hover:text-background inline-flex cursor-pointer items-center justify-center rounded-lg border border-transparent px-5 py-3 text-lg shadow outline outline-2 transition placeholder:uppercase active:translate-y-1 disabled:active:translate-y-0 "
+                  className="inline-flex cursor-pointer items-center justify-center rounded-lg border border-transparent bg-background px-5 py-3 text-lg text-emerald shadow outline outline-2 outline-emerald transition placeholder:uppercase hover:bg-emerald hover:text-background hover:shadow-emerald focus-visible:outline-emerald active:translate-y-1 disabled:active:translate-y-0 dark:text-emerald "
                   type="submit"
                   disabled={loadingState}
                 >
                   Submit
                 </button>
-                <p className="text-emerald text-xl">{responseMessage}</p>
+                <p className="text-xl text-emerald">{responseMessage}</p>
               </div>
             </form>
           </div>

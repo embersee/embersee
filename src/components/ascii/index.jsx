@@ -11,7 +11,7 @@ import { ASCIIEffect } from "@/components/utils/ascii-effect/index";
 import { FontEditor } from "@/components/utils/font-editor";
 import { useControls } from "leva";
 import { text } from "@/lib/leva/text";
-import { useGui } from "@/lib/store";
+import { useGui, useProgress } from "@/lib/store";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Group, MeshNormalMaterial, MathUtils } from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
@@ -28,6 +28,7 @@ const ui = tunnel();
 
 function Scene() {
   const { gui } = useGui();
+  const { setProgress } = useProgress();
 
   const src = "/Porsche_Carrera_GT_2003.glb";
 
@@ -86,6 +87,9 @@ function Scene() {
     const r3 = scroll.range(3 / 5, 1 / 5);
     const r4 = scroll.range(4 / 5, 1 / 5, 0.01); // matrix state
     const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
+    const fullRange = scroll.range(0 / 5, 5 / 5);
+
+    setProgress(fullRange);
 
     // Break down each rotation component
     const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r1);

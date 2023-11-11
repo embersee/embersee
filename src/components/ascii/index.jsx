@@ -23,12 +23,19 @@ import { GUI } from "@/components/utils/gui";
 import { Page } from "@/components/ui/page";
 import Landing from "@/components/sections/landing";
 import ContactForm from "@/components/sections/contact-form";
+import { ScrollTrigger } from "../utils/scroll-trigger";
 
 const ui = tunnel();
 
 function Scene() {
   const { gui } = useGui();
-  const { setProgress } = useProgress();
+  const {
+    setProgress,
+    setCurrentProgress,
+    interact,
+    progress,
+    currentProgress,
+  } = useProgress();
 
   const src = "/Porsche_Carrera_GT_2003.glb";
 
@@ -81,15 +88,22 @@ function Scene() {
   }
 
   useFrame((state, delta) => {
+    const fullRange = scroll.range(0 / 5, 5 / 5);
+
+    if (currentProgress !== progress) {
+      setProgress(fullRange);
+    }
+
+    if (!interact) {
+      setCurrentProgress(fullRange);
+    }
+
     const r0 = scroll.range(0 / 5, 0.8 / 5);
     const r1 = scroll.range(0.8 / 5, 1.5 / 5, 0.05);
     const r2 = scroll.range(2 / 5, 1 / 5, 0.05);
     const r3 = scroll.range(3 / 5, 1 / 5);
     const r4 = scroll.range(4 / 5, 1 / 5, 0.01); // matrix state
     const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
-    const fullRange = scroll.range(0 / 5, 5 / 5);
-
-    setProgress(fullRange);
 
     // Break down each rotation component
     const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r1);
@@ -179,6 +193,9 @@ function Postprocessing() {
 function Inner() {
   const ContextBridge = useContextBridge(AsciiContext);
   const pages = 4;
+
+  const { setScrollControlsRef } = useProgress();
+
   return (
     <>
       <div className="ascii">
@@ -204,11 +221,12 @@ function Inner() {
               className="scroll-controls"
               maxSpeed={0.4}
             >
+              <ScrollTrigger />
               <ContextBridge>
                 <Scene />
                 <Postprocessing />
               </ContextBridge>
-              <Scroll className="w-full" html>
+              <Scroll ref={setScrollControlsRef} className="w-full" html>
                 <Landing />
 
                 <Page />

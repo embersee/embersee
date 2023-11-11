@@ -124,7 +124,7 @@ export default function ContactForm() {
                   >
                     Submit
                   </button>
-                  <p className="text-accent text-xl">{responseMessage}</p>
+                  <p className="text-xl text-accent">{responseMessage}</p>
                 </div>
               </form>
             </div>

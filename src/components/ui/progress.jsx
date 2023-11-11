@@ -7,8 +7,14 @@ function padWithLeadingZeros(num, totalLength) {
 }
 
 export default function Progress() {
-  const { progress, setProgress, setInteract, scrollControlsRef, setScrollTo } =
-    useProgress();
+  const {
+    pages,
+    progress,
+    setProgress,
+    setInteract,
+    scrollControlsRef,
+    setScrollTo,
+  } = useProgress();
   const [isDragging, setIsDragging] = useState(false);
 
   const progressBarRef = useRef(null); // useRef for the progress bar container
@@ -70,6 +76,16 @@ export default function Progress() {
         <div className=" absolute top-0 flex w-full justify-between ">
           <Edge />
           <Edge className="rotate-90" />
+        </div>
+        <div className="absolute bottom-0 flex h-full w-full justify-center pt-[24px]">
+          <div className="flex flex-col  justify-between">
+            {Array.from(Array(pages - 1).fill(0)).map((v, i) => (
+              <div key={i}>---</div>
+            ))}
+
+            {/* <div className="">.</div>
+            <div className="">.</div> */}
+          </div>
         </div>
         <div className=" h-[50vh] p-1" ref={progressBarRef}>
           {/* <div

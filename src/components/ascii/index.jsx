@@ -88,14 +88,9 @@ function Scene() {
   }
 
   useFrame((state, delta) => {
-    const fullRange = scroll.range(0 / 5, 5 / 5);
-
-    if (currentProgress !== progress) {
-      setProgress(fullRange);
-    }
-
     if (!interact) {
-      setCurrentProgress(fullRange);
+      const fullRange = scroll.range(0 / 5, 5 / 5);
+      setProgress(fullRange);
     }
 
     const r0 = scroll.range(0 / 5, 0.8 / 5);
@@ -105,15 +100,19 @@ function Scene() {
     const r4 = scroll.range(4 / 5, 1 / 5, 0.01); // matrix state
     const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
 
+    const rsqw_r1 = rsqw(r1);
+    const rsqw_r2 = rsqw(r2);
+    const rsqw_r3 = rsqw(r3);
+
     // Break down each rotation component
-    const r1Rotation = Math.PI - (Math.PI / 2) * rsqw(r1);
-    const r2Rotation = r2 * (Math.PI - Math.PI / 2) * rsqw(r2);
-    const r3Rotation = r3 * (Math.PI * rsqw(r3)) + r4;
+    const r1Rotation = Math.PI - (Math.PI / 2) * rsqw_r1;
+    const r2Rotation = r2 * (Math.PI - Math.PI / 2) * rsqw_r2;
+    const r3Rotation = r3 * (Math.PI * rsqw_r3) + r4;
 
     // Combine all components for the final rotation value
     model.current.rotation.y = r1Rotation - r2Rotation - r3Rotation;
 
-    let targetScale = 1 + 0.54 * (1 - rsqw(r2) + r3 * 2); // Adjust this as per your zoom out requirement
+    let targetScale = 1 + 0.54 * (1 - rsqw_r2 + r3 * 2); // Adjust this as per your zoom out requirement
 
     const dampenedScale = MathUtils.damp(
       group.current.scale.z,

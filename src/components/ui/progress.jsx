@@ -21,54 +21,54 @@ export default function Progress() {
   const scrollerRef = useRef(null); // useRef for the scroller
   // const scrollerCurrentRef = useRef(null); // useRef for the current pos scroller
 
-  const handleMouseDown = (e) => {
-    setInteract(true);
-    setIsDragging(true);
+  // const handleMouseDown = (e) => {
+  //   setInteract(true);
+  //   setIsDragging(true);
 
-    const offsetY = e.clientY - scrollerRef.current.getBoundingClientRect().top;
-    scrollerRef.current.setAttribute("data-offset-y", offsetY); // Store the offset in the element
-  };
+  //   const offsetY = e.clientY - scrollerRef.current.getBoundingClientRect().top;
+  //   scrollerRef.current.setAttribute("data-offset-y", offsetY); // Store the offset in the element
+  // };
 
-  const handleMouseMove = (e) => {
-    if (!isDragging || !progressBarRef.current) return;
+  // const handleMouseMove = (e) => {
+  //   if (!isDragging || !progressBarRef.current) return;
 
-    const offsetY = parseFloat(
-      scrollerRef.current.getAttribute("data-offset-y"),
-    );
-    const relativeY =
-      e.clientY - progressBarRef.current.getBoundingClientRect().top - offsetY;
+  //   const offsetY = parseFloat(
+  //     scrollerRef.current.getAttribute("data-offset-y"),
+  //   );
+  //   const relativeY =
+  //     e.clientY - progressBarRef.current.getBoundingClientRect().top - offsetY;
 
-    let newProgress = relativeY / progressBarRef.current.clientHeight;
-    newProgress = Math.max(0, Math.min(newProgress, 1));
+  //   let newProgress = relativeY / progressBarRef.current.clientHeight;
+  //   newProgress = Math.max(0, Math.min(newProgress, 1));
 
-    setProgress(newProgress);
-    // Calculate the Y-offset in pixels
-    updateScrollContainer(newProgress);
-  };
+  //   setProgress(newProgress);
+  //   // Calculate the Y-offset in pixels
+  //   updateScrollContainer(newProgress);
+  // };
 
-  const updateScrollContainer = (newProgress) => {
-    const yOffset = newProgress * scrollControlsRef.clientHeight;
-    // Update the offset of the Scroll container
-    setScrollTo(yOffset);
-  };
+  // const updateScrollContainer = (newProgress) => {
+  //   const yOffset = newProgress * scrollControlsRef.clientHeight;
+  //   // Update the offset of the Scroll container
+  //   setScrollTo(yOffset);
+  // };
 
-  const handleMouseUp = () => {
-    setInteract(false);
-    setIsDragging(false);
-  };
+  // const handleMouseUp = () => {
+  //   setInteract(false);
+  //   setIsDragging(false);
+  // };
 
-  useEffect(() => {
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+  // useEffect(() => {
+  //   document.addEventListener("mousemove", handleMouseMove);
+  //   document.addEventListener("mouseup", handleMouseUp);
 
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isDragging]); // Re-run the effect only if isDragging changes
+  //   return () => {
+  //     document.removeEventListener("mousemove", handleMouseMove);
+  //     document.removeEventListener("mouseup", handleMouseUp);
+  //   };
+  // }, [isDragging]); // Re-run the effect only if isDragging changes
 
-  // const translateYValue =
-  //   currentProgress * progressBarRef.current?.clientHeight || 0;
+  // // const translateYValue =
+  // //   currentProgress * progressBarRef.current?.clientHeight || 0;
 
   return (
     <div className="absolute right-0 top-[25vh] hidden select-none sm:block">
@@ -78,9 +78,9 @@ export default function Progress() {
           <Edge className="rotate-90" />
         </div>
         <div className="absolute bottom-0 flex h-full w-full justify-center pt-[24px]">
-          <div className="flex flex-col  justify-between">
+          <div className="flex flex-col justify-between">
             {Array.from(Array(pages - 1).fill(0)).map((v, i) => (
-              <div key={i}>---</div>
+              <div key={i}>...</div>
             ))}
 
             {/* <div className="">.</div>
@@ -88,17 +88,12 @@ export default function Progress() {
           </div>
         </div>
         <div className=" h-[50vh] p-1" ref={progressBarRef}>
-          {/* <div
-            className="relative cursor-grab select-none rounded-[1px] text-xs text-accent outline outline-1 outline-amber-500 backdrop-blur-sm transition-transform delay-[20ms] ease-linear active:cursor-grabbing"
-            style={{ transform: `translateY(${translateYValue}px)` }}
-            ref={scrollerCurrentRef}
-          ></div> */}
           <div
             className=" relative cursor-grab select-none rounded-[1px] p-1 text-xs text-accent outline outline-1 outline-accent backdrop-blur-sm active:cursor-grabbing"
             style={{
               top: `${progress * 100}%`,
             }}
-            onMouseDown={handleMouseDown}
+            // onMouseDown={handleMouseDown}
             ref={scrollerRef}
           >
             {padWithLeadingZeros(progress, 3)}%

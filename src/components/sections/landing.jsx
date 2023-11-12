@@ -20,7 +20,7 @@ export default function Landing() {
         </CrossContainer>
 
         {/* <Seperator /> */}
-        <p className="mt-8 text-2xl">Hacking Cutting-Edge Web Experiences</p>
+        <p className="mt-8 text-2xl">Creating Cutting-Edge Web Experiences</p>
         <p>
           Explore my world of dynamic websites, seamless automation, and
           immersive 3D graphics.

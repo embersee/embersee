@@ -16,7 +16,6 @@ module.exports = {
         whisper: "#5c5b5b",
         flamingo: "#f57abc",
         babyblue: "#78B5F5",
-        seafoam: "#43fab7",
         tokyo: "#7381ff",
         brick: "#FF4D4D",
         frost: "#9dffff",
@@ -24,6 +23,7 @@ module.exports = {
         background: "hsl(var(--background), <alpha-value>)",
         foreground: "hsl(var(--foreground), <alpha-value>)",
         emerald: "hsl(var(--emerald))",
+        seafoam: "hsl(var(--seafoam))",
         primary: colors.neutral,
       },
       borderRadius: {

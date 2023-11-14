@@ -29,13 +29,13 @@ const ui = tunnel();
 
 function Scene() {
   const { gui } = useGui();
-  const {
-    setProgress,
-    setCurrentProgress,
-    interact,
-    progress,
-    currentProgress,
-  } = useProgress();
+  // const {
+  //   setProgress,
+  //   setCurrentProgress,
+  //   interact,
+  //   progress,
+  //   currentProgress,
+  // } = useProgress();
 
   const src = "/Porsche_Carrera_GT_2003.glb";
 
@@ -88,31 +88,22 @@ function Scene() {
   }
 
   useFrame((state, delta) => {
-    if (!interact) {
-      const fullRange = scroll.range(0 / 5, 5 / 5);
-      setProgress(fullRange);
-    }
+    // const fullRange = scroll.range(0 / 5, 5 / 5);
+    // setProgress(fullRange);
 
-    const r0 = scroll.range(0 / 5, 0.8 / 5);
-    const r1 = scroll.range(0.8 / 5, 1.5 / 5, 0.05);
-    const r2 = scroll.range(2 / 5, 1 / 5, 0.05);
-    const r3 = scroll.range(3 / 5, 1 / 5);
-    const r4 = scroll.range(4 / 5, 1 / 5, 0.01); // matrix state
-    const r5 = scroll.range(4.5 / 5, 0.5 / 5); // dissolving stage
-
-    const rsqw_r1 = rsqw(r1);
-    const rsqw_r2 = rsqw(r2);
-    const rsqw_r3 = rsqw(r3);
+    const r0 = scroll.range(0 / 5, 2.5 / 5);
+    const r1 = scroll.range(2 / 5, 3 / 5, 0.1);
+    const r5 = scroll.range(3.5 / 5, 1.5 / 5); // dissolving stage
 
     // Break down each rotation component
-    const r1Rotation = Math.PI - (Math.PI / 2) * rsqw_r1;
-    const r2Rotation = r2 * (Math.PI - Math.PI / 2) * rsqw_r2;
-    const r3Rotation = r3 * (Math.PI * rsqw_r3) + r4;
+    const r1Rotation = Math.PI - (Math.PI / 2) * r1 + r5 - Math.PI / 2;
+    // const r2Rotation = r2  ;
+    // const r3Rotation = r3 * (Math.PI * rsqw_r3) + r4;
 
     // Combine all components for the final rotation value
-    model.current.rotation.y = r1Rotation - r2Rotation - r3Rotation;
+    model.current.rotation.y = r1Rotation;
 
-    let targetScale = 1 + 0.54 * (1 - rsqw_r2 + r3 * 2); // Adjust this as per your zoom out requirement
+    let targetScale = 1 + 0.54 * (5 - r1 + r5 * 5); // Adjust this as per your zoom out requirement
 
     const dampenedScale = MathUtils.damp(
       group.current.scale.z,
@@ -126,7 +117,7 @@ function Scene() {
     group.current.scale.z = dampenedScale;
 
     set({
-      time: r4 + (1 - r0),
+      time: r1 + (1 - r0),
       charactersLimit:
         r0 * DEFAULT.charactersLimit - //fade in
         r5 * DEFAULT.charactersLimit, //fade out
@@ -145,9 +136,6 @@ function Scene() {
     </>
   );
 }
-
-const rsqw = (t, delta = 0.2, a = 1, f = 1 / (2 * Math.PI)) =>
-  (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
 
 function Postprocessing() {
   const { gl, viewport } = useThree();
@@ -191,9 +179,7 @@ function Postprocessing() {
 
 function Inner() {
   const ContextBridge = useContextBridge(AsciiContext);
-  const pages = 4;
-
-  const { setScrollControlsRef } = useProgress();
+  const pages = 2;
 
   return (
     <>
@@ -218,18 +204,18 @@ function Inner() {
             <ScrollControls
               pages={pages}
               className="scroll-controls"
-              maxSpeed={0.4}
+              maxSpeed={1}
             >
               <ScrollTrigger />
               <ContextBridge>
                 <Scene />
                 <Postprocessing />
               </ContextBridge>
-              <Scroll ref={setScrollControlsRef} className="w-full" html>
+              <Scroll
+                className="w-full bg-transparent backdrop-blur-[1px]"
+                html
+              >
                 <Landing />
-
-                <Page />
-                <Page />
 
                 <ContactForm />
               </Scroll>
@@ -244,10 +230,10 @@ function Inner() {
 }
 
 const DEFAULT = {
-  characters: " . */^$#",
-  granularity: 7,
+  characters: " . *e$^/",
+  granularity: 10,
   charactersLimit: 12,
-  fontSize: 86,
+  fontSize: 66,
   fillPixels: false,
   setColor: false,
   color: "#ffffff",

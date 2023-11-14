@@ -7,10 +7,10 @@ export default function Landing() {
   const scroll = useScroll();
   return (
     <Page className="flex flex-col">
-      <div className="flex items-center justify-center">
+      {/* <div className="flex items-center justify-center">
         <p>Scroll to preview</p>
-      </div>
-      <div className=" mx-auto mb-32 mt-auto">
+      </div> */}
+      <div className=" mx-auto my-auto">
         <p className="mb-2 text-2xl">Hey, my name is </p>
 
         <CrossContainer>

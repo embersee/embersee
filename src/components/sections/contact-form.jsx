@@ -37,7 +37,7 @@ export default function ContactForm() {
 
   return (
     <Page className="grid items-center">
-      <section className="py-10 sm:py-20">
+      <section id="contact" className="py-10 sm:py-20">
         <div className="mx-auto max-w-2xl px-2 sm:px-6 lg:max-w-7xl lg:px-8">
           <CrossContainer className="p-1 sm:p-6">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-8">

@@ -1,12 +1,15 @@
-import Container from "./cross-container";
-import Wrapper from "./edge-wrapper";
+import Button from "./button";
 
 export const Nav = () => {
   return (
-    <div className="absolute top-0 p-2 text-lg">
-      <a href="/">
-        <Wrapper className="p-1 px-3">e</Wrapper>
-      </a>
+    <div className="absolute top-0 flex w-full justify-between p-2 text-lg">
+      <Button href="/">embersee</Button>
+
+      <div className="flex space-x-4">
+        <Button href="/about">about</Button>
+
+        <Button href="/about">contact</Button>
+      </div>
     </div>
   );
 };

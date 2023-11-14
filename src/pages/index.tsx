@@ -7,7 +7,7 @@ function Index() {
     <>
       <Nav />
       <ASCII />
-      <Progress />
+      {/* <Progress /> */}
     </>
   );
 }

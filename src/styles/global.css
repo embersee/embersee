@@ -16,6 +16,7 @@
     --sugar-milk: 0, 67%, 98%;
     --cotton-ball: 221, 76%, 95%;
     --emerald: 124, 94%, 74%;
+    --seafoam: 152, 60%, 83%;
 
     --radius: 1rem;
   }
@@ -82,7 +83,7 @@ div::-webkit-scrollbar {
 
 .button .link {
   background: linear-gradient(to right, transparent, transparent),
-    linear-gradient(to right, hsl(var(--accent2)), hsl(var(--accent)));
+    linear-gradient(to right, hsl(var(--accent)), hsl(var(--accent)));
   background-size:
     100% 0.1em,
     0 0.1em;
@@ -101,9 +102,9 @@ div::-webkit-scrollbar {
 }
 
 .input-field {
-  @apply focus:ring-accent dark:focus:ring-accent block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-1 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 autofill:duration-[5000000ms] hover:ring-primary-100 focus:outline-none focus:ring-2 dark:bg-primary-950/70  dark:ring-primary-600/60 dark:placeholder:text-primary-200/60 dark:hover:ring-primary-600/30;
+  @apply block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-1 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 autofill:duration-[5000000ms] hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-accent dark:bg-primary-950/70 dark:ring-primary-600/60  dark:placeholder:text-primary-200/60 dark:hover:ring-primary-600/30 dark:focus:ring-accent;
 }
 
 .submit-button {
-  @apply border-accent text-accent hover:bg-accent hover:shadow-accent focus-visible:outline-accent dark:text-accent inline-flex cursor-pointer items-center justify-center rounded-lg border-2 bg-primary-50/70 px-5 py-3 text-lg shadow outline outline-2 outline-transparent transition hover:text-background active:translate-y-1 disabled:active:translate-y-0 dark:bg-primary-950/70;
+  @apply inline-flex cursor-pointer items-center justify-center rounded-lg border-2 border-accent bg-primary-50/70 px-5 py-3 text-lg text-accent shadow outline outline-2 outline-transparent transition hover:bg-accent hover:text-background hover:shadow-accent focus-visible:outline-accent active:translate-y-1 disabled:active:translate-y-0 dark:bg-primary-950/70 dark:text-accent;
 }

@@ -7,14 +7,7 @@ function padWithLeadingZeros(num, totalLength) {
 }
 
 export default function Progress() {
-  const {
-    pages,
-    progress,
-    setProgress,
-    setInteract,
-    scrollControlsRef,
-    setScrollTo,
-  } = useProgress();
+  const { pages, progress } = useProgress();
   const [isDragging, setIsDragging] = useState(false);
 
   const progressBarRef = useRef(null); // useRef for the progress bar container

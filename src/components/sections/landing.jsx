@@ -1,4 +1,3 @@
-import React from "react";
 import { Page } from "@/components/ui/page";
 import Button from "@/components/ui/button";
 import CrossContainer from "@/components/ui/cross-container";

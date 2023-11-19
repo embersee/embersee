@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useContextBridge } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { FontEditor } from "@/components/utils/font-editor";
@@ -7,10 +7,10 @@ import { text } from "@/lib/leva/text";
 import tunnel from "tunnel-rat";
 import { AsciiContext } from "./context";
 import { GUI } from "@/components/utils/gui";
-import { Scene } from "@/components/ascii/scene.jsx";
-import { Postprocessing } from "@/components/ascii/postprocessing.jsx";
+import { Scene } from "@/components/ascii/scene";
 import { useGui } from "@/lib/store";
 import { cn } from "@/components/utils/classnames";
+import { Postprocessing } from "./postprocessing";
 
 const ui = tunnel();
 
@@ -38,10 +38,8 @@ function Inner() {
             className="canvas-el"
           >
             <ContextBridge>
-              <Suspense fallback={"loading..."}>
-                <Scene />
-                <Postprocessing />
-              </Suspense>
+              <Scene />
+              <Postprocessing />
             </ContextBridge>
           </Canvas>
         </div>
@@ -176,7 +174,7 @@ export function ASCII() {
     [],
   );
 
-  function set({ charactersTexture, ...props }) {
+  function set({ charactersTexture, canvas, ...props }) {
     if (charactersTexture) setCharactersTexture(charactersTexture);
 
     _set(props);

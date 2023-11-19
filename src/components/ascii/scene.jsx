@@ -3,14 +3,14 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { Group, LoadingManager, MeshNormalMaterial } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import { AsciiContext } from "@/components/ascii/context.js";
+import { AsciiContext } from "@/components/ascii/context";
 import { a, useSpring } from "@react-spring/three";
 import { OrbitControls } from "@react-three/drei";
 import { useGui } from "@/lib/store";
 
 const src = "/Porsche_Carrera_GT_2003.glb";
 
-const animationTime = 3000;
+const animationTime = 4000;
 
 export function Scene() {
   const { setLoading } = useGui();
@@ -115,8 +115,8 @@ export function Scene() {
   }
 
   const dissolve = () => {
-    for (let i = 0; i < 1000; i++) {
-      let delta = i / 1000;
+    for (let i = 0; i < 3000; i++) {
+      let delta = i / 3000;
       doSetTimeout(delta);
     }
   };

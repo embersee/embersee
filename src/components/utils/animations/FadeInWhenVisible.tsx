@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { animated, useInView } from "@react-spring/web";
 
 export const FadeInWhenVisible = ({ children }: { children: ReactNode }) => {

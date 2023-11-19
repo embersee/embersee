@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Page } from "@/components/ui/page";
 import Button from "@/components/ui/button";
 import { BackToTop } from "../utils/scroll-buttons";

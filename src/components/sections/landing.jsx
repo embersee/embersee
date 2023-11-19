@@ -1,16 +1,13 @@
+import React from "react";
 import { Page } from "@/components/ui/page";
 import Button from "@/components/ui/button";
-import { useScroll } from "@react-three/drei";
 import CrossContainer from "@/components/ui/cross-container";
+import { vhToPixels } from "@/components/utils/animations/scrollHeight";
 
 export default function Landing() {
-  const scroll = useScroll();
   return (
-    <Page className="flex flex-col">
-      {/* <div className="flex items-center justify-center">
-        <p>Scroll to preview</p>
-      </div> */}
-      <div className=" mx-auto my-auto">
+    <Page className="flex flex-col items-center justify-center">
+      <div className="">
         <p className="mb-2 text-2xl">Hey, my name is </p>
 
         <CrossContainer>
@@ -19,7 +16,6 @@ export default function Landing() {
           </h1>
         </CrossContainer>
 
-        {/* <Seperator /> */}
         <p className="mt-8 text-2xl">Creating Cutting-Edge Web Experiences</p>
         <p>
           Explore my world of dynamic websites, seamless automation, and
@@ -29,14 +25,11 @@ export default function Landing() {
         <div className="mt-5 text-2xl ">
           {/* <Button href="#work">View My Work</Button> */}
           <Button
-            onClick={() =>
-              scroll.el.scrollTo({
-                top: window.innerHeight * 6,
-                behavior: "smooth",
-              })
-            }
+            onClick={() => {
+              window.scrollTo({ top: vhToPixels(100), behavior: "smooth" });
+            }}
           >
-            Let's Talk
+            Let&apos;s Talk
           </Button>
         </div>
       </div>

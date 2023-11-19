@@ -1,189 +1,25 @@
-import {
-  OrbitControls,
-  useContextBridge,
-  ScrollControls,
-  useScroll,
-  Scroll,
-} from "@react-three/drei";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { EffectComposer } from "@react-three/postprocessing";
-import { ASCIIEffect } from "@/components/utils/ascii-effect/index";
+import React, { Suspense, useMemo, useState } from "react";
+import { useContextBridge } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 import { FontEditor } from "@/components/utils/font-editor";
 import { useControls } from "leva";
 import { text } from "@/lib/leva/text";
-import { useGui, useProgress } from "@/lib/store";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { Group, MeshNormalMaterial, MathUtils } from "three";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import tunnel from "tunnel-rat";
 import { AsciiContext } from "./context";
 import { GUI } from "@/components/utils/gui";
-
-import { Page } from "@/components/ui/page";
-import Landing from "@/components/sections/landing";
-import ContactForm from "@/components/sections/contact-form";
-import { ScrollTrigger } from "../utils/scroll-trigger";
+import { Scene } from "@/components/ascii/scene.jsx";
+import { Postprocessing } from "@/components/ascii/postprocessing.jsx";
+import { useGui } from "@/lib/store";
+import { cn } from "@/components/utils/classnames";
 
 const ui = tunnel();
 
-function Scene() {
-  const { gui } = useGui();
-  // const {
-  //   setProgress,
-  //   setCurrentProgress,
-  //   interact,
-  //   progress,
-  //   currentProgress,
-  // } = useProgress();
-
-  const src = "/Porsche_Carrera_GT_2003.glb";
-
-  const gltfLoader = useMemo(() => {
-    const loader = new GLTFLoader();
-
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
-    loader.setDRACOLoader(dracoLoader);
-
-    return loader;
-  }, []);
-
-  const gltf = useMemo(() => {
-    const group = new Group();
-
-    gltfLoader.load(src, ({ scene }) => {
-      group.add(scene);
-      scene.traverse((mesh) => {
-        mesh.material = new MeshNormalMaterial();
-      });
-    });
-
-    return group;
-  }, [src]);
-
-  const { camera } = useThree();
-
-  const defCamera = {
-    x: 1500,
-    y: 550,
-    z: 1500,
-  };
-
-  camera.position.set(defCamera.x, defCamera.y, defCamera.z);
-
-  const { set } = useContext(AsciiContext);
-
-  const group = useRef();
-  const model = useRef();
-
-  const scroll = useScroll();
-
-  if (
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  ) {
-    // dark mode
-    set({ greyscale: false });
-  }
-
-  useFrame((state, delta) => {
-    // const fullRange = scroll.range(0 / 5, 5 / 5);
-    // setProgress(fullRange);
-
-    const r0 = scroll.range(0 / 5, 2.5 / 5);
-    const r1 = scroll.range(2 / 5, 3 / 5, 0.1);
-    const r5 = scroll.range(3.5 / 5, 1.5 / 5); // dissolving stage
-
-    // Break down each rotation component
-    const r1Rotation = Math.PI - (Math.PI / 2) * r1 + r5 - Math.PI / 2;
-    // const r2Rotation = r2  ;
-    // const r3Rotation = r3 * (Math.PI * rsqw_r3) + r4;
-
-    // Combine all components for the final rotation value
-    model.current.rotation.y = r1Rotation;
-
-    let targetScale = 1 + 0.54 * (5 - r1 + r5 * 5); // Adjust this as per your zoom out requirement
-
-    const dampenedScale = MathUtils.damp(
-      group.current.scale.z,
-      targetScale,
-      4,
-      delta,
-    );
-
-    group.current.scale.x = dampenedScale;
-    group.current.scale.y = dampenedScale;
-    group.current.scale.z = dampenedScale;
-
-    set({
-      time: r1 + (1 - r0),
-      charactersLimit:
-        r0 * DEFAULT.charactersLimit - //fade in
-        r5 * DEFAULT.charactersLimit, //fade out
-    });
-  });
-
-  return (
-    <>
-      <group ref={group}>
-        <OrbitControls enable={gui} enableRotate={gui} enableZoom={false} />
-
-        <group ref={model} scale={200} position={-100}>
-          <primitive object={gltf} />
-        </group>
-      </group>
-    </>
-  );
-}
-
-function Postprocessing() {
-  const { gl, viewport } = useThree();
-  const { set } = useContext(AsciiContext);
-
-  useEffect(() => {
-    set({ canvas: gl.domElement });
-  }, [gl]);
-
-  const {
-    charactersTexture,
-    granularity,
-    charactersLimit,
-    fillPixels,
-    color,
-    greyscale,
-    invert,
-    matrix,
-    time,
-    background,
-  } = useContext(AsciiContext);
-
-  return (
-    <EffectComposer>
-      <ASCIIEffect
-        charactersTexture={charactersTexture}
-        granularity={granularity * viewport.dpr}
-        charactersLimit={charactersLimit}
-        fillPixels={fillPixels}
-        color={color}
-        fit={true}
-        greyscale={greyscale}
-        invert={invert}
-        matrix={matrix}
-        time={time}
-        background={background}
-      />
-    </EffectComposer>
-  );
-}
-
 function Inner() {
   const ContextBridge = useContextBridge(AsciiContext);
-  const pages = 2;
-
+  const { loading } = useGui();
   return (
     <>
-      <div className="ascii">
+      <div className={cn("flex h-screen", !loading && "hidden")}>
         <GUI />
         <div className="canvas">
           <Canvas
@@ -197,29 +33,16 @@ function Inner() {
               alpha: true,
               depth: false,
               stencil: false,
-              powerPreference: "low-power",
+              powerPreference: "high-performance",
             }}
             className="canvas-el"
           >
-            <ScrollControls
-              pages={pages}
-              className="scroll-controls"
-              maxSpeed={1}
-            >
-              <ScrollTrigger />
-              <ContextBridge>
+            <ContextBridge>
+              <Suspense fallback={"loading..."}>
                 <Scene />
                 <Postprocessing />
-              </ContextBridge>
-              <Scroll
-                className="w-full bg-transparent backdrop-blur-[1px]"
-                html
-              >
-                <Landing />
-
-                <ContactForm />
-              </Scroll>
-            </ScrollControls>
+              </Suspense>
+            </ContextBridge>
           </Canvas>
         </div>
       </div>
@@ -232,7 +55,7 @@ function Inner() {
 const DEFAULT = {
   characters: " . *e$^/",
   granularity: 10,
-  charactersLimit: 12,
+  charactersLimit: 11,
   fontSize: 66,
   fillPixels: false,
   setColor: false,
@@ -353,7 +176,7 @@ export function ASCII() {
     [],
   );
 
-  function set({ charactersTexture, canvas, ...props }) {
+  function set({ charactersTexture, ...props }) {
     if (charactersTexture) setCharactersTexture(charactersTexture);
 
     _set(props);

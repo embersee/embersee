@@ -1,8 +1,7 @@
+import React, { useState } from "react";
 import { Page } from "@/components/ui/page";
 import Button from "@/components/ui/button";
-import { BackToTop, EnableExperimentation } from "../utils/scroll-buttons";
-
-import { useState } from "react";
+import { BackToTop } from "../utils/scroll-buttons";
 import CrossContainer from "@/components/ui/cross-container";
 
 export default function ContactForm() {
@@ -133,14 +132,14 @@ export default function ContactForm() {
       </section>
       <div className="my-4 mt-auto flex w-full items-center justify-center space-x-4">
         <BackToTop />
-        <EnableExperimentation />
+        {/*<EnableExperimentation />*/}
       </div>
     </Page>
   );
 }
 
 function isFormDataComplete(formData) {
-  for (let [key, value] of formData.entries()) {
+  for (let [, value] of formData.entries()) {
     if (!value || value.trim() === "") {
       return false; // Found an empty field
     }

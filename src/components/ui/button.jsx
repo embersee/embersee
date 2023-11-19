@@ -1,3 +1,4 @@
+import React from "react";
 import EdgeWrapper from "@/components/ui/edge-wrapper";
 
 export default function Button({ href, blank, children, ...props }) {

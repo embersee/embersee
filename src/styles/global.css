@@ -3,108 +3,94 @@
 @tailwind utilities;
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 @layer base {
-  :root {
-    --background: 0, 0%, 100%;
-    --foreground: 0, 0%, 20%;
-    --accent: 21, 84%, 62%;
-    --accent2: 21, 84%, 62%;
-
-    --sugar-milk: 0, 67%, 98%;
-    --cotton-ball: 221, 76%, 95%;
-    --emerald: 124, 94%, 74%;
-    --seafoam: 152, 60%, 83%;
-
-    --radius: 1rem;
-  }
-
-  @media (prefers-color-scheme: dark) {
     :root {
-      --background: 0, 0%, 0%;
-      --foreground: 219, 83%, 95%;
-      --accent: 124, 94%, 74%;
-      --accent2: 124, 94%, 74%;
-    }
-  }
+        --background: 0, 0%, 100%;
+        --foreground: 0, 0%, 20%;
+        --accent: 21, 84%, 62%;
+        --accent2: 21, 84%, 62%;
 
-  @font-face {
-    font-display: block;
-    font-family: "Geist Mono";
-    font-style: normal;
-    font-weight: 400;
-    src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
-  }
+        --sugar-milk: 0, 67%, 98%;
+        --cotton-ball: 221, 76%, 95%;
+        --emerald: 124, 94%, 74%;
+        --seafoam: 152, 60%, 83%;
+
+        --radius: 1rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background: 0, 0%, 0%;
+            --foreground: 219, 83%, 95%;
+            --accent: 124, 94%, 74%;
+            --accent2: 124, 94%, 74%;
+        }
+    }
+
+    @font-face {
+        font-display: block;
+        font-family: "Geist Mono";
+        font-style: normal;
+        font-weight: 400;
+        src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
+    }
 }
 
 body {
-  height: 100vh;
-  overflow: hidden;
-  overscroll-behavior: none;
+    height: 100vh;
+    /*overflow: hidden;*/
+    overscroll-behavior: none;
 }
 
 main {
-  @apply font-mono selection:bg-babycarrot;
+    @apply font-mono selection:bg-babycarrot;
 }
 
 .ascii {
-  display: flex;
-  height: 100vh;
+    display: flex;
+    height: 100vh;
 }
 
 .canvas {
-  width: 100%;
-  position: relative;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    background: transparent;
 }
 
 /* Makes mobile scrolling work. */
 canvas,
 div {
-  touch-action: auto !important;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+    touch-action: auto !important;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 canvas,
 div::-webkit-scrollbar {
-  display: none;
+    display: none;
+}
+
+.page {
+    @apply relative h-screen w-screen p-2 z-10;
 }
 
 .button {
-  @apply w-min cursor-pointer select-none whitespace-nowrap;
-}
-
-.button .link {
-  background: linear-gradient(to right, transparent, transparent),
-    linear-gradient(to right, hsl(var(--accent)), hsl(var(--accent)));
-  background-size:
-    100% 0.1em,
-    0 0.1em;
-  background-position:
-    100% 100%,
-    0 100%;
-  background-repeat: no-repeat;
-  transition: background-size ease-in-out 250ms;
-}
-
-.button:hover .link,
-.button:focus .link {
-  background-size:
-    0 0.1em,
-    100% 0.1em;
+    @apply w-min cursor-pointer select-none whitespace-nowrap;
 }
 
 .input-field {
-  @apply block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-1 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 autofill:duration-[5000000ms] hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-accent dark:bg-primary-950/70 dark:ring-primary-600/60  dark:placeholder:text-primary-200/60 dark:hover:ring-primary-600/30 dark:focus:ring-accent;
+    @apply block w-full appearance-none rounded-lg bg-primary-50/70 px-4 py-4 text-lg ring-1 ring-primary-400/40 transition placeholder:uppercase placeholder:text-primary-950/60 autofill:duration-[5000000ms] hover:ring-primary-100 focus:outline-none focus:ring-2 focus:ring-accent dark:bg-primary-950/70 dark:ring-primary-600/60  dark:placeholder:text-primary-200/60 dark:hover:ring-primary-600/30 dark:focus:ring-accent;
 }
 
 .submit-button {
-  @apply inline-flex cursor-pointer items-center justify-center rounded-lg border-2 border-accent bg-primary-50/70 px-5 py-3 text-lg text-accent shadow outline outline-2 outline-transparent transition hover:bg-accent hover:text-background hover:shadow-accent focus-visible:outline-accent active:translate-y-1 disabled:active:translate-y-0 dark:bg-primary-950/70 dark:text-accent;
+    @apply inline-flex cursor-pointer items-center justify-center rounded-lg border-2 border-accent bg-primary-50/70 px-5 py-3 text-lg text-accent shadow outline outline-2 outline-transparent transition hover:bg-accent hover:text-background hover:shadow-accent focus-visible:outline-accent active:translate-y-1 disabled:active:translate-y-0 dark:bg-primary-950/70 dark:text-accent;
 }

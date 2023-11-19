@@ -1,14 +1,12 @@
+import React from "react";
 import Button from "@/components/ui/button";
 import { useGui } from "@/lib/store";
-import { useScroll } from "@react-three/drei";
 
 export function BackToTop() {
-  const scroll = useScroll();
-
   return (
     <Button
       onClick={() =>
-        scroll.el.scrollTo({
+        window.scrollTo({
           top: 0,
           behavior: "smooth",
         })

@@ -1,5 +1,6 @@
 import Button from "./button";
 import { FadeInWhenVisible } from "@/components/utils/animations/FadeInWhenVisible";
+import { vhToPixels } from "@/components/utils/animations/scrollHeight";
 
 export const Nav = () => {
   return (
@@ -8,9 +9,15 @@ export const Nav = () => {
         <Button href="/">embersee</Button>
 
         <div className="flex space-x-4">
-          <Button href="/about">about</Button>
+          {/*<Button href="/about">about</Button>*/}
 
-          <Button href="/about">contact</Button>
+          <Button
+            onClick={() =>
+              window.scrollTo({ top: vhToPixels(100), behavior: "smooth" })
+            }
+          >
+            contact
+          </Button>
         </div>
       </div>
     </FadeInWhenVisible>

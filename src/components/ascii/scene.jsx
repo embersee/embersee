@@ -41,7 +41,7 @@ export function Scene() {
 
     setTimeout(() => {
       setLoading(false);
-    }, animationTime + 500);
+    }, animationTime + 300);
   };
 
   manager.onProgress = function (url, itemsLoaded, itemsTotal) {
@@ -128,8 +128,9 @@ export function Scene() {
     },
   });
 
+  let charLimit = 34;
+
   useFrame((state, delta) => {
-    // console.log(goal);
     model.current.rotation.y += delta * 0.7;
   });
 

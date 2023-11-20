@@ -52,7 +52,7 @@ function Inner() {
 
 const DEFAULT = {
   characters: " . *e$^/",
-  granularity: 10,
+  granularity: 8,
   charactersLimit: 11,
   fontSize: 66,
   fillPixels: false,

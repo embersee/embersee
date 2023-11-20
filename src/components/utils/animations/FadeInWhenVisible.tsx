@@ -7,7 +7,7 @@ export const FadeInWhenVisible = ({ children }: { children: ReactNode }) => {
       from: {
         scale: 0.9,
         opacity: 0,
-        y: 200,
+        y: 100,
       },
       to: {
         scale: 1,
@@ -16,7 +16,7 @@ export const FadeInWhenVisible = ({ children }: { children: ReactNode }) => {
       },
     }),
     {
-      rootMargin: "20% 0%",
+      rootMargin: "0% 0%",
     },
   );
 

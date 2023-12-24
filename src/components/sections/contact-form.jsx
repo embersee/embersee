@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Page } from "@/components/ui/page";
 import Button from "@/components/ui/button";
-import { BackToTop } from "../utils/scroll-buttons";
 import CrossContainer from "@/components/ui/cross-container";
+import { BackToTop } from "@/components/utils/scroll-buttons/index.jsx";
 
 export default function ContactForm() {
   const [responseMessage, setResponseMessage] = useState("");
@@ -130,9 +130,8 @@ export default function ContactForm() {
           </CrossContainer>
         </div>
       </section>
-      <div className="my-4 mt-auto flex w-full items-center justify-center space-x-4">
+      <div className="my-4 ml-auto flex items-end justify-center space-x-4">
         <BackToTop />
-        {/*<EnableExperimentation />*/}
       </div>
     </Page>
   );

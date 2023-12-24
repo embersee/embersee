@@ -94,3 +94,28 @@ div::-webkit-scrollbar {
 .submit-button {
     @apply inline-flex cursor-pointer items-center justify-center rounded-lg border-2 border-accent bg-primary-50/70 px-5 py-3 text-lg text-accent shadow outline outline-2 outline-transparent transition hover:bg-accent hover:text-background hover:shadow-accent focus-visible:outline-accent active:translate-y-1 disabled:active:translate-y-0 dark:bg-primary-950/70 dark:text-accent;
 }
+
+.shiny {
+    position: relative;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.shiny::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--y, 0) * 1px - 50px);
+    left: calc(var(--x, 0) * 1px - 50px);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(hsl(var(--emerald)), transparent 80%);
+    z-index: 200;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.shiny:hover::after {
+    opacity: 0.4;
+}
